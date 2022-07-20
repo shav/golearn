@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 func main() {
@@ -40,5 +39,11 @@ func main() {
 	fmt.Printf("flags = %d, %d, %d, %d, %d\n", flag1, flag2, flag3, flag4, flag5)
 	fmt.Printf("flag1 | flag2 | flag3 = %d\n", flag1|flag2|flag3)
 
-	fmt.Printf("Big const: %f", math.Pow(10, 1000))
+	const cBigNum1 int64 = 1e+18
+	fmt.Printf("Big const: %d\n", cBigNum1)
+
+	const cBigNum2 = 100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+	const cBigNum3 = 100000000000000000000000000000000000000000000
+	var div float64 = cBigNum2 / cBigNum3
+	fmt.Println(div)
 }
