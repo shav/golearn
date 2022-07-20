@@ -84,6 +84,8 @@ func main() {
 	var f3 float64 = 2.56789e+100
 	fmt.Println(f3)
 
+	fmt.Printf("int / float: %f\n", float32(int320)/f1)
+
 	fmt.Println("--------------------------------------")
 
 	// Комплексные числа
@@ -100,6 +102,8 @@ func main() {
 
 	var c4 = complex(1, 2)
 	fmt.Println(c4)
+
+	fmt.Println("--------------------------------------")
 
 	// Math
 	fmt.Printf("abs: %d\n", int(math.Abs(-10)))
