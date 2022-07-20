@@ -52,6 +52,9 @@ func main() {
 	multiOverflow := int640 * int641
 	fmt.Printf("multiOverflow = %d \n", multiOverflow)
 
+	var int642 int64 = 2.5e+18
+	fmt.Println(int642)
+
 	d1 := 3
 	d2 := 2
 	fmt.Printf("+int / +int: %[1]d = %[3]d * %[2]d %+[4]d\n", d1, d2, d1/d2, d1%d2)
@@ -78,6 +81,9 @@ func main() {
 	fmt.Printf("float -> int: %d\n", int(f2))
 	fmt.Printf("round(float): %d\n", int(math.Round(float64(f2))))
 
+	var f3 float64 = 2.56789e+100
+	fmt.Println(f3)
+
 	fmt.Println("--------------------------------------")
 
 	// Комплексные числа
@@ -88,4 +94,10 @@ func main() {
 	fmt.Println(c0 + c1)
 	fmt.Println(c0 * c1)
 	fmt.Println(c0 / c1)
+
+	var c3 complex64 = 2.3456e+10 + 3.14e+20i
+	fmt.Println(c3)
+
+	var c4 = complex(1, 2)
+	fmt.Println(c4)
 }
