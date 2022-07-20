@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"math/big"
 )
 
 func main() {
@@ -112,4 +113,31 @@ func main() {
 	fmt.Printf("exp: %f\n", math.Exp(2))
 	fmt.Printf("sqrt: %f\n", math.Sqrt(144))
 	fmt.Printf("inf * -inf: %f\n", math.Inf(+1)*math.Inf(-1))
+
+	fmt.Println("--------------------------------------")
+
+	// Big numbers
+	var n1 = big.NewInt(1e+10)
+	fmt.Println(n1)
+	var n2, _ = new(big.Int).SetString("1234567890098765432100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", 10)
+	fmt.Println(n2)
+	var n3 = new(big.Int).SetBytes([]byte{1, 2}) // в 256-ричной системе счисления
+	fmt.Println(n3)
+	fmt.Println("big int multi: ", new(big.Int).Mul(n1, n2))
+
+	var q0 = big.NewRat(1, 2)
+	fmt.Println(q0)
+	var q1 = big.NewRat(4, 6) // дробь сразу автоматически сокращается
+	fmt.Println(q1)
+	var q2 = new(big.Rat).SetFloat64(0.4)
+	fmt.Println(q2)
+	var q3, _ = new(big.Rat).SetString("5/6")
+	fmt.Println(q3)
+	fmt.Println("big rational multi: ", new(big.Rat).Mul(q0, q1))
+
+	var r0 = big.NewFloat(3.14485690238903427689034772348907199974235780923457890234759043625907823901457890234).SetPrec(100)
+	fmt.Println(r0)
+	var r1 = new(big.Float).SetRat(big.NewRat(2, 3)).SetPrec(100) // Что-то пошло не так
+	fmt.Println(r1)
+	fmt.Println("big float multi: ", new(big.Float).Mul(r0, r1).SetPrec(1000))
 }
