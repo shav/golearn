@@ -100,4 +100,12 @@ func main() {
 
 	var c4 = complex(1, 2)
 	fmt.Println(c4)
+
+	// Math
+	fmt.Printf("abs: %d\n", int(math.Abs(-10)))
+	fmt.Printf("sin: %f\n", math.Sin(math.Pi/4))
+	fmt.Printf("log10: %f\n", math.Log10(1000))
+	fmt.Printf("exp: %f\n", math.Exp(2))
+	fmt.Printf("sqrt: %f\n", math.Sqrt(144))
+	fmt.Printf("inf * -inf: %f\n", math.Inf(+1)*math.Inf(-1))
 }
