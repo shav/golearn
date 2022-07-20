@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"math"
 	"math/big"
+	"math/cmplx"
 )
 
 func main() {
@@ -113,6 +114,12 @@ func main() {
 	fmt.Printf("exp: %f\n", math.Exp(2))
 	fmt.Printf("sqrt: %f\n", math.Sqrt(144))
 	fmt.Printf("inf * -inf: %f\n", math.Inf(+1)*math.Inf(-1))
+
+	fmt.Printf("exp complex: %v\n", cmplx.Exp(2+3i))
+	fmt.Printf("pow complex: %v\n", cmplx.Pow(2+3i, -1i))
+	ro, phi := cmplx.Polar(1 - 2i)
+	fmt.Printf("polar complex: %f*e^(i*%f)\n", ro, phi)
+	fmt.Printf("complex from polar: %v\n", cmplx.Rect(ro, phi))
 
 	fmt.Println("--------------------------------------")
 
