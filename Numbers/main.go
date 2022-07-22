@@ -64,6 +64,15 @@ func main() {
 	fmt.Printf("-int / +int: %[1]d = %[3]d * %[2]d %+[4]d\n", -d1, d2, -d1/d2, -d1%d2)
 	fmt.Printf("+int / -int: %[1]d = %[3]d * %[2]d %+[4]d\n", d1, -d2, d1/-d2, d1%-d2)
 
+	//++d1 // prefix increment is not supported
+	//var intInc = (d1++) + 1 // increment in expression is not supported
+	d1++
+	fmt.Printf("int++: %d\n", d1)
+	d1--
+	fmt.Printf("int--: %d\n", d1)
+	d1 += 10
+	fmt.Printf("int+=: %d\n", d1)
+
 	// // Error:
 	// var zero int = 0
 	// fmt.Printf("div by zero: %d\n", 1/zero)
@@ -88,6 +97,11 @@ func main() {
 
 	fmt.Printf("int / float: %f\n", float32(int320)/f1)
 
+	f0++
+	fmt.Printf("float++: %f\n", f0)
+	f0--
+	fmt.Printf("float--: %f\n", f0)
+
 	fmt.Println("--------------------------------------")
 
 	// Комплексные числа
@@ -104,6 +118,11 @@ func main() {
 
 	var c4 = complex(1, 2)
 	fmt.Println(c4)
+
+	c0++
+	fmt.Printf("complex++: %v\n", c0)
+	c0--
+	fmt.Printf("complex--: %v\n", c0)
 
 	fmt.Println("--------------------------------------")
 
