@@ -6,6 +6,9 @@ type Person struct {
 	name string
 }
 
+// globalVar := 1 // global variables initialization is not supported
+var globalVar int = 1
+
 func main() {
 	// Объявление и инициализация переменных
 	//var num0 // error
@@ -34,6 +37,30 @@ func main() {
 	num6, num7 := 60, 70
 	fmt.Println(num6)
 	fmt.Println(num7)
+
+	// область видимости переменных
+	fmt.Printf("globalVar: %d\n", globalVar)
+	if true {
+		var blockVar = 2
+		fmt.Printf("blockVar if: %d\n", blockVar)
+		for i := 0; i < 2; i++ {
+			forVar := i
+			fmt.Printf("blockVar for: %d\n", forVar)
+		}
+		// forVar = 3 // переменная из блока for недоступна вне блока
+	} else {
+		// blockVar = 3 // переменная из блока if недоступна автоматически в блоке else
+		var blockVar = 3
+		fmt.Printf("blockVar else: %d\n", blockVar)
+	}
+	// blockVar = 3 // переменная из блока if недоступна вне блока
+
+	var f = func() {
+		var funcVar = 4
+		fmt.Printf("funcVar: %d\n", funcVar)
+	}
+	f()
+	// funcVar = 5 // переменная из анонимной функции недоступна вне этой функции
 
 	// Переменные и указатели на структуры
 	var person0 Person
