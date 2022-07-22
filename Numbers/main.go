@@ -5,6 +5,8 @@ import (
 	"math"
 	"math/big"
 	"math/cmplx"
+	"math/rand"
+	"time"
 )
 
 func main() {
@@ -170,4 +172,12 @@ func main() {
 	var r1 = new(big.Float).SetRat(big.NewRat(2, 3)).SetPrec(100) // Что-то пошло не так
 	fmt.Println(r1)
 	fmt.Println("big float multi: ", new(big.Float).Mul(r0, r1).SetPrec(1000))
+
+	fmt.Println("--------------------------------------")
+
+	// random numbers
+	rand.Seed(time.Now().Unix())
+	fmt.Println("random int: ", rand.Intn(10))
+	fmt.Println("random float: ", rand.Float32())
+	fmt.Println("random int range: ", rand.Perm(10))
 }
