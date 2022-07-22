@@ -92,6 +92,10 @@ func main() {
 	fmt.Printf("float -> int: %d\n", int(f2))
 	fmt.Printf("round(float): %d\n", int(math.Round(float64(f2))))
 
+	var s = 0.001 + 0.099 + 0.2
+	const eps float64 = 0.00001
+	fmt.Printf("sum == float: %v\n", math.Abs(s-0.3) < eps)
+
 	var f3 float64 = 2.56789e+100
 	fmt.Println(f3)
 
