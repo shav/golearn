@@ -6,6 +6,7 @@ import (
 	"math/big"
 	"math/cmplx"
 	"math/rand"
+	"strconv"
 	"time"
 )
 
@@ -180,4 +181,79 @@ func main() {
 	fmt.Println("random int: ", rand.Intn(10))
 	fmt.Println("random float: ", rand.Float32())
 	fmt.Println("random int range: ", rand.Perm(10))
+
+	fmt.Println("--------------------------------------")
+
+	// Сериализация чисел
+	var intToStr int64 = 32
+	var intStr2 = fmt.Sprintf("%b", intToStr)
+	fmt.Printf("int2: %s\n", intStr2)
+	intStr2 = strconv.FormatInt(intToStr, 2)
+	fmt.Printf("int2: %s\n", intStr2)
+
+	var intStr8 = fmt.Sprintf("%o", intToStr)
+	fmt.Printf("int8: %s\n", intStr8)
+	intStr8 = strconv.FormatInt(intToStr, 8)
+	fmt.Printf("int8: %s\n", intStr8)
+
+	var intStr10 = fmt.Sprintf("%d", intToStr)
+	fmt.Printf("int10: %s\n", intStr10)
+	intStr10 = strconv.FormatInt(intToStr, 10)
+	fmt.Printf("int10: %s\n", intStr10)
+
+	var intStr16 = fmt.Sprintf("%x", intToStr)
+	fmt.Printf("int16: %s\n", intStr16)
+	intStr16 = strconv.FormatInt(intToStr, 16)
+	fmt.Printf("int16: %s\n", intStr16)
+
+	var floatToStr = 3.1415
+	var floatStr2 = fmt.Sprintf("%0.2f", floatToStr)
+	fmt.Printf("float2: %s\n", floatStr2)
+	floatStr2 = strconv.FormatFloat(floatToStr, 'f', 2, 64)
+	fmt.Printf("float2: %s\n", floatStr2)
+
+	var floatStr4 = fmt.Sprintf("%0.4f", floatToStr)
+	fmt.Printf("float4: %s\n", floatStr4)
+	floatStr4 = strconv.FormatFloat(floatToStr, 'f', 4, 64)
+	fmt.Printf("float4: %s\n", floatStr4)
+
+	fmt.Println("--------------------------------------")
+
+	// Парсинг чисел
+	intFromStr16, err := strconv.ParseInt("1A", 16, 32)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("parsed int16: %d\n", intFromStr16)
+	}
+
+	intFromStr2, err := strconv.ParseInt("12", 2, 32)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("parsed int2: %d\n", intFromStr2)
+	}
+
+	// пока непонятно, как лучше парсить целые числа с разделителями тысяч (например, "123 456 789")
+	intFromStr10, err := strconv.ParseInt("123456789", 10, 32)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("parsed int10: %d\n", intFromStr10)
+	}
+
+	intFromStr16, err = strconv.ParseInt("0x1A", 0, 32)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("parsed int16: %d\n", intFromStr16)
+	}
+
+	// пока непонятно, как лучше парсить вещественные числа с другим десятичным разделителем (например, "3,14")
+	floatFromStr, err := strconv.ParseFloat("3.14", 32)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("parsed float: %f\n", floatFromStr)
+	}
 }
