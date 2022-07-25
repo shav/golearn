@@ -152,8 +152,12 @@ func main() {
 	// Big numbers
 	var n1 = big.NewInt(1e+10)
 	fmt.Println(n1)
+	var bn1 = n1.Int64()
+	fmt.Printf("bigint -> int: %d\n", bn1)
 	var n2, _ = new(big.Int).SetString("1234567890098765432100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000", 10)
 	fmt.Println(n2)
+	var bn2 = n2.Int64()
+	fmt.Printf("bigint2 -> int: %d\n", bn2)
 	var n3 = new(big.Int).SetBytes([]byte{1, 2}) // в 256-ричной системе счисления
 	fmt.Println(n3)
 	fmt.Println("big int multi: ", new(big.Int).Mul(n1, n2))
@@ -170,6 +174,8 @@ func main() {
 
 	var r0 = big.NewFloat(3.14485690238903427689034772348907199974235780923457890234759043625907823901457890234).SetPrec(100)
 	fmt.Println(r0)
+	var bf, _ = r0.Float64()
+	fmt.Printf("bigfloat -> float: %0.100f\n", bf)
 	var r1 = new(big.Float).SetRat(big.NewRat(2, 3)).SetPrec(100) // Что-то пошло не так
 	fmt.Println(r1)
 	fmt.Println("big float multi: ", new(big.Float).Mul(r0, r1).SetPrec(1000))
