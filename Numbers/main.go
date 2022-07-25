@@ -262,4 +262,6 @@ func main() {
 	} else {
 		fmt.Printf("parsed float: %f\n", floatFromStr)
 	}
+
+	fmt.Println("--------------------------------------")
 }
