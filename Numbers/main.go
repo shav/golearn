@@ -1,6 +1,7 @@
 package main
 
 import (
+	crypto "crypto/rand"
 	"fmt"
 	"math"
 	"math/big"
@@ -185,6 +186,7 @@ func main() {
 	// random numbers
 	rand.Seed(time.Now().Unix())
 	fmt.Println("random int: ", rand.Intn(10))
+	fmt.Println("crypto random int: ", NewCryptoRand(100))
 	fmt.Println("random float: ", rand.Float32())
 	fmt.Println("random int range: ", rand.Perm(10))
 
@@ -264,4 +266,12 @@ func main() {
 	}
 
 	fmt.Println("--------------------------------------")
+}
+
+func NewCryptoRand(max int64) int64 {
+	rnd, err := crypto.Int(crypto.Reader, big.NewInt(max))
+	if err != nil {
+		panic(err)
+	}
+	return rnd.Int64()
 }
