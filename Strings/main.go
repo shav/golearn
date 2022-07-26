@@ -2,7 +2,9 @@ package main
 
 import (
 	"bytes"
+	"encoding/csv"
 	"fmt"
+	"os"
 	"regexp"
 	"strings"
 	"unicode"
@@ -259,10 +261,39 @@ line5`
 	snakeCase := "first_name"
 	camelCase := toCamelCase(snakeCase)
 	fmt.Printf("camel case: %s\n", camelCase)
+
+	fmt.Println("--------------------------------------")
+
+	printCsvFile("data.csv", 0)
+	printCsvFile("data_uncommon.csv", ';')
 }
 
 func toCamelCase(input string) string {
 	titleSpace := strings.Title(strings.Replace(input, "_", " ", -1))
 	camel := strings.Replace(titleSpace, " ", "", -1)
 	return strings.ToLower(camel[:1]) + camel[1:]
+}
+
+func printCsvFile(filePath string, comma rune) {
+	file, err := os.Open(filePath)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	reader := csv.NewReader(file)
+	if comma == 0 {
+		comma = ','
+	}
+	reader.Comma = comma
+	reader.Comment = '#'
+
+	for {
+		record, e := reader.Read()
+		if e != nil {
+			fmt.Println(e)
+			break
+		}
+		fmt.Println(record)
+	}
 }
