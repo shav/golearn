@@ -94,6 +94,7 @@ line5`
 	fmt.Println("--------------------------------------")
 
 	// Поиск подстрок
+	// Вариант 1
 	var refString = "Mary had a little lamb"
 	lookFor := "lamb"
 	contain := strings.Contains(refString, lookFor)
@@ -103,6 +104,7 @@ line5`
 	contain = strings.Contains(refString, lookFor)
 	fmt.Printf("The \"%s\" contains \"%s\": %t \n", refString, lookFor, contain)
 
+	// Вариант 2
 	startsWith := "Mary"
 	starts := strings.HasPrefix(refString, startsWith)
 	fmt.Printf("The \"%s\" starts with \"%s\": %t \n", refString, startsWith, starts)
@@ -111,9 +113,23 @@ line5`
 	ends := strings.HasSuffix(refString, endWith)
 	fmt.Printf("The \"%s\" ends with \"%s\": %t \n", refString, endWith, ends)
 
+	// Вариант 3
+	refString = `[{ \"email\": \"email@example.com\" \"phone\": 555467890},
+{ \"email\": \"other@domain.com\" \"phone\": 555467890}]`
+	emailRegexp := regexp.MustCompile("[a-zA-Z0-9]{1,}@[a-zA-Z0-9]{1,}\\.[a-z]{1,}")
+	email1 := emailRegexp.FindString(refString)
+	fmt.Println("First email: ", email1)
+
+	allEmails := emailRegexp.FindAllString(refString, -1)
+	fmt.Println("All emails: ")
+	for _, email := range allEmails {
+		fmt.Println(email)
+	}
+
 	fmt.Println("--------------------------------------")
 
 	// разбиение на подстроки
+	// Вариант 1
 	refString = "Mary had a little lamb"
 	words := strings.Fields(refString)
 	fmt.Println("Split into words:")
@@ -122,6 +138,7 @@ line5`
 	}
 	fmt.Println("--------------------------------------")
 
+	// Вариант 2
 	refString = "Mary_had a little_lamb"
 	words = strings.Split(refString, "_")
 	fmt.Println("Split into words by _:")
@@ -130,6 +147,7 @@ line5`
 	}
 	fmt.Println("--------------------------------------")
 
+	// Вариант 3
 	splitFunc := func(r rune) bool {
 		return strings.ContainsRune("*%,_", r)
 	}
@@ -142,6 +160,7 @@ line5`
 	}
 	fmt.Println("--------------------------------------")
 
+	// Вариант 4
 	refString = "Mary*had,a%little_lamb"
 	words = regexp.MustCompile("[*,%_]{1}").Split(refString, -1)
 	fmt.Println("Split into words by punctuation via regexp:")
