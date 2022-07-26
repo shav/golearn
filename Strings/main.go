@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"regexp"
 	"strings"
 	"unicode/utf8"
 )
@@ -92,7 +93,7 @@ line5`
 	fmt.Println("--------------------------------------")
 
 	// Поиск подстрок
-	const refString = "Mary had a little lamb"
+	var refString = "Mary had a little lamb"
 	lookFor := "lamb"
 	contain := strings.Contains(refString, lookFor)
 	fmt.Printf("The \"%s\" contains \"%s\": %t \n", refString, lookFor, contain)
@@ -108,4 +109,40 @@ line5`
 	endWith := "lamb"
 	ends := strings.HasSuffix(refString, endWith)
 	fmt.Printf("The \"%s\" ends with \"%s\": %t \n", refString, endWith, ends)
+
+	fmt.Println("--------------------------------------")
+
+	// разбиение на подстроки
+	words := strings.Fields(refString)
+	fmt.Println("Split into words:")
+	for idx, word := range words {
+		fmt.Printf("Word %d is: %s\n", idx, word)
+	}
+	fmt.Println("--------------------------------------")
+
+	refString = "Mary_had a little_lamb"
+	words = strings.Split(refString, "_")
+	fmt.Println("Split into words by _:")
+	for idx, word := range words {
+		fmt.Printf("Word %d is: %s\n", idx, word)
+	}
+	fmt.Println("--------------------------------------")
+
+	splitFunc := func(r rune) bool {
+		return strings.ContainsRune("*%,_", r)
+	}
+
+	refString = "Mary*had,a%little_lamb"
+	words = strings.FieldsFunc(refString, splitFunc)
+	fmt.Println("Split into words by punctuation:")
+	for idx, word := range words {
+		fmt.Printf("Word %d is: %s\n", idx, word)
+	}
+	fmt.Println("--------------------------------------")
+
+	words = regexp.MustCompile("[*,%_]{1}").Split(refString, -1)
+	fmt.Println("Split into words by punctuation via regexp:")
+	for idx, word := range words {
+		fmt.Printf("Word %d is: %s\n", idx, word)
+	}
 }
