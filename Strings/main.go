@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+	"unicode"
 	"unicode/utf8"
 )
 
@@ -232,4 +233,36 @@ line5`
 	regex := regexp.MustCompile("l[a-z]+")
 	out = regex.ReplaceAllString(refString, "replacement")
 	fmt.Println(out)
+
+	fmt.Println("--------------------------------------")
+
+	// регистр строк
+	email := "ExamPle@domain.com"
+	fmt.Printf("lower case: %s\n", strings.ToLower(email))
+	fmt.Printf("upper case: %s\n", strings.ToUpper(email))
+
+	name := "isaac newton"
+	fmt.Printf("title case: %s\n", strings.Title(name))
+
+	dz := "ǳ"
+	title := strings.ToTitle(dz)
+	upper := strings.ToUpper(dz)
+	fmt.Printf("upper case: %s\n", upper)
+	fmt.Printf("title case: %s\n", title)
+
+	const i = "i"
+	title = strings.ToTitle(i)
+	titleTurk := strings.ToTitleSpecial(unicode.TurkishCase, i)
+	fmt.Printf("title case: %s\n", title)
+	fmt.Printf("title case turk: %s\n", titleTurk)
+
+	snakeCase := "first_name"
+	camelCase := toCamelCase(snakeCase)
+	fmt.Printf("camel case: %s\n", camelCase)
+}
+
+func toCamelCase(input string) string {
+	titleSpace := strings.Title(strings.Replace(input, "_", " ", -1))
+	camel := strings.Replace(titleSpace, " ", "", -1)
+	return strings.ToLower(camel[:1]) + camel[1:]
 }
