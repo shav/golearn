@@ -266,6 +266,16 @@ line5`
 
 	printCsvFile("data.csv", 0)
 	printCsvFile("data_uncommon.csv", ';')
+
+	fmt.Println("--------------------------------------")
+
+	// триминг строк
+	stringWithSpaces := "\t\t\n   Go \tis\n Awesome \t\t"
+	trimResult := strings.TrimSpace(stringWithSpaces)
+	fmt.Println(trimResult)
+	r := regexp.MustCompile("\\s+")
+	replace := r.ReplaceAllString(stringWithSpaces, " ")
+	fmt.Println(replace)
 }
 
 func toCamelCase(input string) string {
