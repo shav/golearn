@@ -114,6 +114,7 @@ line5`
 	fmt.Println("--------------------------------------")
 
 	// разбиение на подстроки
+	refString = "Mary had a little lamb"
 	words := strings.Fields(refString)
 	fmt.Println("Split into words:")
 	for idx, word := range words {
@@ -141,6 +142,7 @@ line5`
 	}
 	fmt.Println("--------------------------------------")
 
+	refString = "Mary*had,a%little_lamb"
 	words = regexp.MustCompile("[*,%_]{1}").Split(refString, -1)
 	fmt.Println("Split into words by punctuation via regexp:")
 	for idx, word := range words {
@@ -191,4 +193,24 @@ line5`
 	fmt.Println(sb.String())
 
 	fmt.Println("--------------------------------------")
+
+	// Замена подстрок
+	// Вариант 1
+	refString = "Mary had a little lamb"
+	refString2 := "lamb lamb lamb lamb"
+
+	out := strings.Replace(refString, "lamb", "wolf", -1)
+	fmt.Println(out)
+	out = strings.Replace(refString2, "lamb", "wolf", 2)
+	fmt.Println(out)
+
+	// Вариант 2
+	replacer := strings.NewReplacer("lamb", "wolf", "Mary", "Jack")
+	out = replacer.Replace(refString)
+	fmt.Println(out)
+
+	// Вариант 3
+	regex := regexp.MustCompile("l[a-z]+")
+	out = regex.ReplaceAllString(refString, "replacement")
+	fmt.Println(out)
 }
