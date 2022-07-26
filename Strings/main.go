@@ -145,4 +145,13 @@ line5`
 	for idx, word := range words {
 		fmt.Printf("Word %d is: %s\n", idx, word)
 	}
+	fmt.Println("--------------------------------------")
+
+	// объединение массива строк
+	var refStringSlice = []string{
+		"FIRST_NAME = 'Jack'",
+		"INSURANCE_NO = 333444555",
+		"EFFECTIVE_FROM = SYSDATE"}
+	sentence := strings.Join(refStringSlice, " AND ")
+	fmt.Println(sentence)
 }
