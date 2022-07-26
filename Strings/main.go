@@ -28,6 +28,10 @@ func main() {
 	const gammaStr = "γ"
 	var gamma, _ = utf8.DecodeRuneInString(gammaStr)
 	fmt.Printf("%c: %[1]v\n", gamma)
+	beta := gamma - 1
+	fmt.Printf("%c: %[1]v\n", beta)
+	delta := gamma + 1
+	fmt.Printf("%c: %[1]v\n", delta)
 
 	const rootStr = "本"
 	var root, _ = utf8.DecodeRuneInString(rootStr)
