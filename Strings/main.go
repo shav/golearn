@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strings"
 	"unicode/utf8"
 )
 
@@ -87,4 +88,24 @@ line5`
 		fmt.Printf("%c ", c)
 	}
 	fmt.Println()
+
+	fmt.Println("--------------------------------------")
+
+	// Поиск подстрок
+	const refString = "Mary had a little lamb"
+	lookFor := "lamb"
+	contain := strings.Contains(refString, lookFor)
+	fmt.Printf("The \"%s\" contains \"%s\": %t \n", refString, lookFor, contain)
+
+	lookFor = "wolf"
+	contain = strings.Contains(refString, lookFor)
+	fmt.Printf("The \"%s\" contains \"%s\": %t \n", refString, lookFor, contain)
+
+	startsWith := "Mary"
+	starts := strings.HasPrefix(refString, startsWith)
+	fmt.Printf("The \"%s\" starts with \"%s\": %t \n", refString, startsWith, starts)
+
+	endWith := "lamb"
+	ends := strings.HasSuffix(refString, endWith)
+	fmt.Printf("The \"%s\" ends with \"%s\": %t \n", refString, endWith, ends)
 }
