@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"regexp"
 	"strings"
@@ -154,4 +155,40 @@ line5`
 		"EFFECTIVE_FROM = SYSDATE"}
 	sentence := strings.Join(refStringSlice, " AND ")
 	fmt.Println(sentence)
+
+	fmt.Println("--------------------------------------")
+
+	// конкатенация строк
+	// Вариант 1
+	var concatStr = str0 + unicodeStr
+	fmt.Println(concatStr)
+
+	myStrings := []string{"This ", "is ", "even ", "more ", "performant "}
+	// Вариант 2
+	buffer := bytes.Buffer{}
+	for _, str := range myStrings {
+		buffer.WriteString(str)
+	}
+	fmt.Println(buffer.String())
+
+	// Вариант 3
+	var strlen = 0
+	for _, str := range myStrings {
+		strlen += len(str)
+	}
+	concat := make([]byte, strlen)
+	index := 0
+	for _, str := range myStrings {
+		index += copy(concat[index:], []byte(str))
+	}
+	fmt.Println(string(concat[:]))
+
+	// Вариант 4
+	var sb strings.Builder
+	for _, str := range myStrings {
+		sb.WriteString(str)
+	}
+	fmt.Println(sb.String())
+
+	fmt.Println("--------------------------------------")
 }
