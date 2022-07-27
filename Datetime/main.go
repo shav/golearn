@@ -14,6 +14,9 @@ func main() {
 	now := time.Now()
 	fmt.Println("Now: ", now)
 
+	timestamp := time.Now().Unix()
+	fmt.Println("Timestamp: ", timestamp)
+
 	// часовые пояса
 	localDateTime1 := time.Date(2022, time.March, 5, 8, 5, 2, 0, time.Local)
 	fmt.Println(localDateTime1)
