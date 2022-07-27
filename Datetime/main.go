@@ -97,10 +97,14 @@ func main() {
 
 	// Составные части дат-времени
 	t = localDateTime
-	year, month, dayOfMonth, weekDay := t.Year(), t.Month(), t.Day(), t.Weekday()
+	year, month, dayOfYear, dayOfMonth, weekDay := t.Year(), t.Month(), t.YearDay(), t.Day(), t.Weekday()
 	hour, minute, second := t.Hour(), t.Minute(), t.Second()
 	fmt.Printf("%d day of %s %d is %s\n", dayOfMonth, month, year, weekDay)
+	fmt.Printf("%d day of %d year is %s\n", dayOfYear, year, t.Format("02.01.2006"))
 	fmt.Printf("Hours: %d Minutes: %d Seconds: %d\n", hour, minute, second)
+	fmt.Println(t.Date())
+	fmt.Println(t.Clock())
 
 	fmt.Println("--------------------------------------")
+
 }
