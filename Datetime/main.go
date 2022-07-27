@@ -18,40 +18,40 @@ func main() {
 	fmt.Println("Timestamp: ", timestamp)
 
 	// часовые пояса
-	localDateTime1 := time.Date(2022, time.March, 5, 8, 5, 2, 0, time.Local)
-	fmt.Println(localDateTime1)
+	localDateTime := time.Date(2022, time.March, 5, 8, 5, 2, 0, time.Local)
+	fmt.Println(localDateTime)
 
-	utcDateTime1 := time.Date(2022, time.March, 5, 8, 5, 2, 0, time.UTC)
-	fmt.Println(utcDateTime1)
+	utcDateTime := time.Date(2022, time.March, 5, 8, 5, 2, 0, time.UTC)
+	fmt.Println(utcDateTime)
 
 	mskTimeZone := time.FixedZone("MSK", +3*60*60 /* sec */)
-	mskDateTime1 := time.Date(2022, time.March, 5, 8, 5, 2, 0, mskTimeZone)
-	fmt.Println(mskDateTime1)
+	mskDateTime := time.Date(2022, time.March, 5, 8, 5, 2, 0, mskTimeZone)
+	fmt.Println(mskDateTime)
 
 	fmt.Println("--------------------------------------")
 
 	// форматирование дат
 	fmt.Println("Standard format:")
-	fmt.Println(localDateTime1.Format("02 January 2006 15:04:05"))
-	fmt.Println(localDateTime1.Format("02.01.2006"))
+	fmt.Println(localDateTime.Format("02 January 2006 15:04:05"))
+	fmt.Println(localDateTime.Format("02.01.2006"))
 	fmt.Println()
 
 	fmt.Println("goodsign/monday format:")
 	var locale monday.Locale = monday.LocaleRuRU
-	fmt.Println(monday.Format(localDateTime1, "02 January 2006 15:04:05", locale))
-	fmt.Println(monday.Format(localDateTime1, "02 January 2006 (Mon)", locale))
-	fmt.Println(monday.Format(localDateTime1, monday.MediumFormatsByLocale[locale], locale))
+	fmt.Println(monday.Format(localDateTime, "02 January 2006 15:04:05", locale))
+	fmt.Println(monday.Format(localDateTime, "02 January 2006 (Mon)", locale))
+	fmt.Println(monday.Format(localDateTime, monday.MediumFormatsByLocale[locale], locale))
 	fmt.Println()
 
 	fmt.Println("bmuller/arrow format:")
-	fmt.Println(arrow.New(localDateTime1).CFormat("%d.%m.%Y %H:%M:%S"))
-	fmt.Println(arrow.New(localDateTime1).CFormat("%d %B %Y (%A)"))
+	fmt.Println(arrow.New(localDateTime).CFormat("%d.%m.%Y %H:%M:%S"))
+	fmt.Println(arrow.New(localDateTime).CFormat("%d %B %Y (%A)"))
 	fmt.Println()
 
 	fmt.Println("klauspost/lctime format:")
 	loc := "ru_RU"
-	fmt.Println(lctime.StrftimeLoc(loc, "%c", localDateTime1))
-	fmt.Println(lctime.StrftimeLoc(loc, "%d %b %Y (%a)", localDateTime1))
+	fmt.Println(lctime.StrftimeLoc(loc, "%c", localDateTime))
+	fmt.Println(lctime.StrftimeLoc(loc, "%d %b %Y (%a)", localDateTime))
 
 	fmt.Println("--------------------------------------")
 
@@ -92,4 +92,15 @@ func main() {
 		panic(err)
 	}
 	fmt.Println(t2)
+
+	fmt.Println("--------------------------------------")
+
+	// Составные части дат-времени
+	t = localDateTime
+	year, month, dayOfMonth, weekDay := t.Year(), t.Month(), t.Day(), t.Weekday()
+	hour, minute, second := t.Hour(), t.Minute(), t.Second()
+	fmt.Printf("%d day of %s %d is %s\n", dayOfMonth, month, year, weekDay)
+	fmt.Printf("Hours: %d Minutes: %d Seconds: %d\n", hour, minute, second)
+
+	fmt.Println("--------------------------------------")
 }
