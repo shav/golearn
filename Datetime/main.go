@@ -28,6 +28,10 @@ func main() {
 	mskDateTime := time.Date(2022, time.March, 5, 8, 5, 2, 0, mskTimeZone)
 	fmt.Println(mskDateTime)
 
+	izhTimeZone := time.FixedZone("IZH", +4*60*60 /* sec */)
+	izhTimeFromMsk := mskDateTime.In(izhTimeZone)
+	fmt.Println("Datetime MSK -> IZH: ", izhTimeFromMsk)
+
 	fmt.Println("--------------------------------------")
 
 	// форматирование дат
@@ -125,7 +129,6 @@ func main() {
 	mskDateTime2 := time.Date(2022, time.March, 5, 8, 5, 2, 0, mskTimeZone)
 	fmt.Println("MSK datetime equals: ", mskDateTime2.Equal(mskDateTime))
 
-	izhTimeZone := time.FixedZone("IZH", +4*60*60 /* sec */)
 	izhDateTime := time.Date(2022, time.March, 5, 9, 5, 2, 0, izhTimeZone)
 	fmt.Println("MSK and IZH datetime equals: ", izhDateTime.Equal(mskDateTime))
 }
