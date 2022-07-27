@@ -112,12 +112,18 @@ func main() {
 
 	// Кастомные типы на основе базовых
 	var c temperature.Celcius = +101
+	cInt := 103
+	c = temperature.Celcius(cInt)
+	c += 2
 	fmt.Printf("c: %0.1f\n", c)
-	fmt.Printf("rune(c): %d\n", rune(c))
+	fmt.Printf("float(c): %0.1f\n", float64(c))
 	fmt.Printf("string(c): %s\n", string(int(c)))
-	fmt.Printf("c.ToFarenheite(): %0.1f\n", c.ToFarenheite())
-	var f temperature.Farenheite = -10
+
+	var f temperature.Farenheite = -11
+	f++
 	fmt.Printf("f: %0.1f\n", f)
 	fmt.Printf("int(f): %d\n", int(f))
-	fmt.Printf("f.ToCelcius(): %0.1f\n", f.ToCelcius())
+
+	// var sum = f + c // Типы температур не совпадают
+	// f = temperature.Farenheite(c) // допустимо с точки зрения go, но некорректно с логической точки зрения
 }
