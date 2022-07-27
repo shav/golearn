@@ -107,4 +107,25 @@ func main() {
 
 	fmt.Println("--------------------------------------")
 
+	// математика даты-времени
+	origin := mskDateTime
+	dateTimeNext3 := origin.Add(72 * time.Hour)
+	fmt.Printf("+3 days: %v\n", dateTimeNext3)
+
+	dateTimePrev3 := origin.Add(-72 * time.Hour)
+	fmt.Printf("-3 days: %v\n", dateTimePrev3)
+
+	fmt.Printf("-3days is before +3days: %v\n", dateTimePrev3.Before(dateTimeNext3))
+	fmt.Printf("+3days is after -3days: %v\n", dateTimeNext3.After(dateTimePrev3))
+
+	fmt.Printf("diff between +3days and origin is: %v\n", dateTimeNext3.Sub(origin))
+	fmt.Printf("diff between -3days and origin is: %v\n", dateTimePrev3.Sub(origin))
+
+	mskDateTime = time.Date(2022, time.March, 5, 8, 5, 2, 0, mskTimeZone)
+	mskDateTime2 := time.Date(2022, time.March, 5, 8, 5, 2, 0, mskTimeZone)
+	fmt.Println("MSK datetime equals: ", mskDateTime2.Equal(mskDateTime))
+
+	izhTimeZone := time.FixedZone("IZH", +4*60*60 /* sec */)
+	izhDateTime := time.Date(2022, time.March, 5, 9, 5, 2, 0, izhTimeZone)
+	fmt.Println("MSK and IZH datetime equals: ", izhDateTime.Equal(mskDateTime))
 }
