@@ -81,6 +81,13 @@ func main() {
 	numbers := []int{1, 2, 3}
 	add(numbers...)
 	add([]int{1, 2, 3, 4}...)
+
+	fmt.Println("---------------------------------")
+
+	// несколько возвращаемых значений
+	n1, n2 := 10, 4
+	q, r := divide(n1, n2)
+	fmt.Printf("divide(%d, %d): q=%d, r=%d\n", n1, n2, q, r)
 }
 
 func fib(n uint) uint {
@@ -148,4 +155,11 @@ func add(numbers ...int) int {
 		sum += number
 	}
 	return sum
+}
+
+// именованные возвращаемые значения
+func divide(x, y int) (q int, r int) {
+	q = x / y
+	r = x % y
+	return
 }
