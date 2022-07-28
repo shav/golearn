@@ -2,6 +2,7 @@ package main
 
 import (
 	"artem/functions/temperature"
+	"errors"
 	"fmt"
 	"math/big"
 )
@@ -14,6 +15,9 @@ type Point struct {
 func (p *Point) String() string {
 	return fmt.Sprintf("(%d, %d)", p.x, p.y)
 }
+
+type Predicate func(int) bool
+type Operation func(int, int) int
 
 func main() {
 	// методы для кастомных типов
@@ -88,6 +92,24 @@ func main() {
 	n1, n2 := 10, 4
 	q, r := divide(n1, n2)
 	fmt.Printf("divide(%d, %d): q=%d, r=%d\n", n1, n2, q, r)
+
+	fmt.Println("---------------------------------")
+
+	// анонимная функция
+	var mult Operation = func(x int, y int) int { return x * y }
+	fmt.Printf("multiply(%d, %d): %d\n", n1, n2, mult(n1, n2))
+
+	// функция как возвращаемое значение другой функции
+	sub, _ := getOperation("-")
+	fmt.Printf("subtract(%d, %d): %d\n", n1, n2, sub(n1, n2))
+
+	// передача функции параметром в другую функцию
+	sumPositive := sumBy(isPositive, -1, 2, -3, 4, -5, 6)
+	fmt.Printf("sum(positive): %d\n", sumPositive)
+
+	// замыкание окружения
+	squareNext := square(2)
+	fmt.Printf("%d, %d, %d, %d, %d", squareNext(), squareNext(), squareNext(), squareNext(), squareNext())
 }
 
 func fib(n uint) uint {
@@ -120,6 +142,8 @@ func sum(x int, y int) int {
 func subtract(x, y int) int {
 	return x - y
 }
+
+func multiply(x int, y int) int { return x * y }
 
 func inc(x int) int {
 	x++
@@ -162,4 +186,42 @@ func divide(x, y int) (q int, r int) {
 	q = x / y
 	r = x % y
 	return
+}
+
+func isPositive(n int) bool {
+	return n > 0
+}
+
+func sumBy(criteria Predicate, numbers ...int) int {
+	s := 0
+	for _, num := range numbers {
+		if criteria(num) {
+			s += num
+		}
+	}
+	return s
+}
+
+func getOperation(op string) (operation Operation, err error) {
+	switch op {
+	case "+":
+		return sum, nil
+	case "-":
+		return subtract, nil
+	case "*":
+		return multiply, nil
+	case "/":
+		return func(x int, y int) int { return x / y }, nil
+	default:
+		return nil, errors.New("unknown operation")
+	}
+}
+
+func square(origin int) func() int {
+	var s int = origin
+	return func() int {
+		result := s * s
+		s++
+		return result
+	}
 }
