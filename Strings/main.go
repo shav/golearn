@@ -73,6 +73,9 @@ line5`
 	var rawStr = `line1\nline2`
 	fmt.Println(rawStr)
 
+	var specStr = "\tw1\t\"w2\"\\w3"
+	fmt.Println(specStr)
+
 	fmt.Printf("ascii str[1]: %c\n", str0[1])
 	fmt.Printf("unicode str[1]: %c\n", unicodeStr[1])
 	fmt.Printf("unicode str[3:5]: %s\n", unicodeStr[3:5])
