@@ -51,4 +51,14 @@ func main() {
 		fmt.Printf("%d, ", num)
 	}
 	fmt.Println()
+
+	fmt.Println("---------------------------------")
+
+	// копирование массива
+	copyNumbers5 := numbers5
+	copyNumbers5[1] = 2
+	fmt.Println("Copied changed array:")
+	fmt.Println(copyNumbers5)
+	fmt.Println("Original array:")
+	fmt.Println(numbers5)
 }
