@@ -31,6 +31,10 @@ func main() {
 	colors := [3]string{2: "blue", 0: "red", 1: "green"}
 	fmt.Println(colors)
 
+	// инициализация - двумерный массив
+	var table = [4][4]int{{1}, {1, 2}, {1, 2, 3}, {1, 2, 3, 4}}
+	fmt.Println(table)
+
 	fmt.Println("---------------------------------")
 
 	// обращение к элементам массива по индексу
@@ -41,6 +45,18 @@ func main() {
 
 	fmt.Println("---------------------------------")
 
+	// заполнение - двумерный массив
+	var board [4][4]int
+	board[0][0] = 1
+	board[0][3] = 1
+	for column := range board[1] {
+		board[1][column] = 1
+	}
+	fmt.Println(board)
+
+	fmt.Println("---------------------------------")
+
+	// итерация по элементам массива
 	for i := len(numbers5) - 1; i >= 0; i-- {
 		num := numbers5[i]
 		fmt.Printf("%d, ", num)
