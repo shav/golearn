@@ -53,6 +53,35 @@ func main() {
 	}
 	fmt.Println()
 
+	var users = [3]string{"Tom", "Alice", "Kate"}
+	for index, value := range users {
+		fmt.Println(index, value)
+	}
+	for _, value := range users {
+		fmt.Println(value)
+	}
+
+	var numbers = [10]int{1, -2, 3, -4, 5, -6, -7, 8, -9, 10}
+	for _, num := range numbers {
+		if num < 0 {
+			continue // переходим к следующей итерации
+		}
+		if num > 6 {
+			break // выходим из цикла
+		}
+		fmt.Printf("%d, ", num)
+	}
+	fmt.Println()
+
+	fmt.Println("--------------------------------------")
+
+	for i := 1; i < 10; i++ {
+		for j := 1; j < 10; j++ {
+			fmt.Print(i*j, "\t")
+		}
+		fmt.Println()
+	}
+
 	fmt.Println("--------------------------------------")
 
 	// Switch
