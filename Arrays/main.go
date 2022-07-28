@@ -30,4 +30,12 @@ func main() {
 	// инициализация - массивы как словари
 	colors := [3]string{2: "blue", 0: "red", 1: "green"}
 	fmt.Println(colors)
+
+	fmt.Println("---------------------------------")
+
+	// обращение к элементам массива по индексу
+	fmt.Printf("array[1]: %d\n", numbers5[1])
+	numbers5[1] = 51
+	fmt.Println(numbers5)
+	// n7 := numbers5[7] // compile error: index out of range
 }
