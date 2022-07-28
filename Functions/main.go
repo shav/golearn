@@ -6,6 +6,15 @@ import (
 	"math/big"
 )
 
+type Point struct {
+	x int
+	y int
+}
+
+func (p *Point) String() string {
+	return fmt.Sprintf("(%d, %d)", p.x, p.y)
+}
+
 func main() {
 	// методы для кастомных типов
 	var c temperature.Celcius = +101
@@ -20,15 +29,43 @@ func main() {
 	fmt.Println("---------------------------------")
 
 	// рекурсивные функции
-	var n uint = 100_000
-	//fmt.Printf("fib(%d)        = %d\n", n, fib(n))
+	var n uint = 10
+	fmt.Printf("fib(%d)        = %d\n", n, fib(n))
 	fibN := fibDynamic(n)
 	fmt.Printf("fibDynamic(%d) = %v\n", n, fibN.String())
 	// fibDynamic(1_000_000) // stackoverflow
+
+	fmt.Println("---------------------------------")
+
+	// вызов функций с параметрами
+	sum(2, 1)
+	subtract(2, 1)
+
+	// передача параметров по значению
+	x := 1
+	fmt.Printf("Before inc: %d\n", x)
+	inc(x)
+	fmt.Printf("After inc: %d\n", x)
+
+	p := Point{x: 1, y: 2}
+	fmt.Printf("Before move: %s\n", p.String())
+	move(p, 10, 10)
+	fmt.Printf("After move: %s\n", p.String())
+
+	// передача параметров по ссылке
+	fmt.Printf("Before inc(ref): %d\n", x)
+	incRef(&x)
+	fmt.Printf("After inc(ref): %d\n", x)
+
+	fmt.Printf("Before move(ref): %s\n", p.String())
+	moveRef(&p, 10, 10)
+	fmt.Printf("After move(ref): %s\n", p.String())
+
+	fmt.Println("---------------------------------")
 }
 
 func fib(n uint) uint {
-	if n == 0 || n == 1 {
+	if n == 1 || n == 2 {
 		return 1
 	}
 	return fib(n-1) + fib(n-2)
@@ -48,4 +85,34 @@ func fibDynamic(n uint) big.Int {
 		fibcache[n] = f
 		return f
 	}
+}
+
+func sum(x int, y int) int {
+	return x + y
+}
+
+func subtract(x, y int) int {
+	return x - y
+}
+
+func inc(x int) int {
+	x++
+	return x
+}
+
+func incRef(x *int) int {
+	(*x)++
+	return *x
+}
+
+func move(p Point, dx int, dy int) Point {
+	p.x += dx
+	p.y += dy
+	return p
+}
+
+func moveRef(p *Point, dx int, dy int) Point {
+	p.x += dx
+	p.y += dy
+	return *p
 }
