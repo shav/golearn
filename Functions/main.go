@@ -72,6 +72,15 @@ func main() {
 	p.x = 50
 	p.y = 50
 	fmt.Printf("After scaled point change: %s\n", sp.String())
+
+	fmt.Println("---------------------------------")
+
+	// переменное число параметров функции
+	add(1, 2, 3, 4)
+	add(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+	numbers := []int{1, 2, 3}
+	add(numbers...)
+	add([]int{1, 2, 3, 4}...)
 }
 
 func fib(n uint) uint {
@@ -131,4 +140,12 @@ func scale(p *Point, k int) *Point {
 	p.x *= k
 	p.y *= k
 	return p
+}
+
+func add(numbers ...int) int {
+	var sum = 0
+	for _, number := range numbers {
+		sum += number
+	}
+	return sum
 }
