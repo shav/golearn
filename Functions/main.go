@@ -52,16 +52,26 @@ func main() {
 	move(p, 10, 10)
 	fmt.Printf("After move: %s\n", p.String())
 
-	// передача параметров по ссылке
-	fmt.Printf("Before inc(ref): %d\n", x)
-	incRef(&x)
-	fmt.Printf("After inc(ref): %d\n", x)
+	fmt.Println("---------------------------------")
 
-	fmt.Printf("Before move(ref): %s\n", p.String())
+	// передача параметров по ссылке
+	fmt.Printf("Before inc(*): %d\n", x)
+	incRef(&x)
+	fmt.Printf("After inc(*): %d\n", x)
+
+	fmt.Printf("Before move(*): %s\n", p.String())
 	moveRef(&p, 10, 10)
-	fmt.Printf("After move(ref): %s\n", p.String())
+	fmt.Printf("After move(*): %s\n", p.String())
 
 	fmt.Println("---------------------------------")
+
+	// возврат результата функции по ссылке
+	fmt.Printf("Before scale()*: %s\n", p.String())
+	sp := scale(&p, 2)
+	fmt.Printf("After scale()*: %s\n", sp.String())
+	p.x = 50
+	p.y = 50
+	fmt.Printf("After scaled point change: %s\n", sp.String())
 }
 
 func fib(n uint) uint {
@@ -115,4 +125,10 @@ func moveRef(p *Point, dx int, dy int) Point {
 	p.x += dx
 	p.y += dy
 	return *p
+}
+
+func scale(p *Point, k int) *Point {
+	p.x *= k
+	p.y *= k
+	return p
 }
