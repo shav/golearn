@@ -8,7 +8,14 @@ func main() {
 	// Константы
 	const cNum0 int = 100
 	fmt.Println(cNum0)
-	//cNum = 101 // error
+
+	//cNum = 101 // error: значение константы изменять нельзя
+
+	const cNum00 int = cNum0
+	fmt.Println(cNum00)
+
+	//var numVar int = 1
+	//const cNum3 int = numVar // error: константу нельзя инициализировать значением переменной
 
 	const (
 		cNum1 = 40
