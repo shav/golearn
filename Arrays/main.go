@@ -38,4 +38,17 @@ func main() {
 	numbers5[1] = 51
 	fmt.Println(numbers5)
 	// n7 := numbers5[7] // compile error: index out of range
+
+	fmt.Println("---------------------------------")
+
+	for i := len(numbers5) - 1; i >= 0; i-- {
+		num := numbers5[i]
+		fmt.Printf("%d, ", num)
+	}
+	fmt.Println()
+
+	for _, num := range numbers5 {
+		fmt.Printf("%d, ", num)
+	}
+	fmt.Println()
 }
