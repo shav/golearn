@@ -5,5 +5,27 @@ import (
 )
 
 func main() {
-	fmt.Printf("")
+	// инициализация словарей
+	studentMarks := make(map[string]int)
+	fmt.Printf("%v, len = %d\n", studentMarks, len(studentMarks))
+
+	studentMarks = map[string]int{
+		"Tom":   1,
+		"Bob":   2,
+		"Sam":   4,
+		"Alice": 5,
+	}
+	fmt.Printf("%v, len = %d\n", studentMarks, len(studentMarks))
+
+	// обращение к элементам словаря по ключу
+	if val, ok := studentMarks["Tom"]; ok {
+		fmt.Printf("Tom mark: %d\n", val)
+	}
+	// Если ключа в словаре нет, то возвращается значение по-умолчанию:
+	fmt.Printf("Artem mark: %d\n", studentMarks["Artem"])
+
+	studentMarks["Tom"] = 10
+	fmt.Printf("%v, len = %d\n", studentMarks, len(studentMarks))
+
+	fmt.Println("---------------------------------")
 }
