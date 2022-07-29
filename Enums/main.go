@@ -1,6 +1,7 @@
 package main
 
 import (
+	"artem/enums/calendar"
 	"artem/enums/roles"
 	"artem/enums/seasons"
 	"artem/enums/weekdays"
@@ -29,4 +30,12 @@ func main() {
 
 	role2 := roles.Guest
 	fmt.Println(role2)
+
+	fmt.Println("---------------------------------")
+
+	month1, _ := calendar.MonthFromString("May")
+	fmt.Println(month1)
+
+	month2 := calendar.Months.April
+	fmt.Println(month2)
 }

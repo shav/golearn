@@ -24,8 +24,8 @@ var roles = map[string]Role{
 	Admin.name:     Admin,
 }
 
-func (r Role) String() string {
-	return r.name
+func (role Role) String() string {
+	return role.name
 }
 
 func FromString(str string) (Role, error) {
