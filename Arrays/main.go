@@ -77,4 +77,25 @@ func main() {
 	fmt.Println(copyNumbers5)
 	fmt.Println("Original array:")
 	fmt.Println(numbers5)
+
+	fmt.Println("---------------------------------")
+
+	// передача массива в качестве аргумента функции (по значению)
+	fmt.Println("Original array:")
+	fmt.Println(numbers5)
+	setValue(numbers5, 0, -10)
+	fmt.Println("After array  modified at func (by value):")
+	fmt.Println(numbers5)
+	// передача массива в качестве аргумента функции (по ссылке)
+	setValueByRef(&numbers5, 0, -10)
+	fmt.Println("After array  modified at func (by ref):")
+	fmt.Println(numbers5)
+}
+
+func setValue(array [5]int, index uint, value int) {
+	array[index] = value
+}
+
+func setValueByRef(array *[5]int, index uint, value int) {
+	array[index] = value
 }

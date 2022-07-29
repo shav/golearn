@@ -47,11 +47,6 @@ func main() {
 
 	fmt.Println("--------------------------------------")
 
-	// срез как аргумент функции с переменным числом параметров
-	fmt.Println(join(numbers...))
-
-	fmt.Println("--------------------------------------")
-
 	// срезы - как окно в массив
 	planets := [...]string{
 		"Меркурий",
@@ -115,6 +110,18 @@ func main() {
 	sort.StringSlice(planets[:]).Sort() // сортировка массива "на месте"
 	fmt.Println("Sorted array:")
 	fmt.Println(planets)
+
+	fmt.Println("--------------------------------------")
+
+	// срез как аргумент функции с переменным числом параметров
+	fmt.Println(join(numbers...))
+
+	// передача срезов в качестве аргумента функции (по значению)
+	fmt.Println("Original slice:")
+	fmt.Println(users)
+	setValue(users, 0, "Том")
+	fmt.Println("After slice  modified at func:")
+	fmt.Println(users)
 }
 
 func delete(slice []string, index uint) []string {
@@ -127,4 +134,8 @@ func join(numbers ...int) string {
 		numStr[i] = fmt.Sprintf("%d", numbers[i])
 	}
 	return strings.Join(numStr, ", ")
+}
+
+func setValue(slice []string, index uint, value string) {
+	slice[index] = value
 }
