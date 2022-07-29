@@ -18,26 +18,32 @@ const (
 	Sunday
 )
 
+var weekdayNames = [...]string{"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"}
+
 func (weekday Weekday) String() string {
-	switch weekday {
-	case Monday:
-		return "Monday"
-	case Tuesday:
-		return "Tuesday"
-	case Wednesday:
-		return "Wednesday"
-	case Thursday:
-		return "Thursday"
-	case Friday:
-		return "Friday"
-	case Saturday:
-		return "Saturday"
-	case Sunday:
-		return "Sunday"
-	default:
-		return ""
-	}
+	return weekdayNames[weekday-1]
 }
+
+//func (weekday Weekday) String() string {
+//	switch weekday {
+//	case Monday:
+//		return "Monday"
+//	case Tuesday:
+//		return "Tuesday"
+//	case Wednesday:
+//		return "Wednesday"
+//	case Thursday:
+//		return "Thursday"
+//	case Friday:
+//		return "Friday"
+//	case Saturday:
+//		return "Saturday"
+//	case Sunday:
+//		return "Sunday"
+//	default:
+//		return ""
+//	}
+//}
 
 func FromString(str string) (Weekday, error) {
 	switch strings.ToLower(str) {
