@@ -96,6 +96,16 @@ func main() {
 	fmt.Println("After slice modified without reallocation:")
 	fmt.Println(planets)
 	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
+
+	fmt.Println("--------------------------------------")
+
+	// срез строки
+	neptune := "Neptune"
+	tune := neptune[3:]
+	fmt.Println(tune)
+	//tune[0] = 'd' // error: срез строки изменять нельзя
+	neptune = "Poseidon"
+	fmt.Println(tune)
 }
 
 func delete(slice []string, index uint) []string {
