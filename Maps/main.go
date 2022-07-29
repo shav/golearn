@@ -25,7 +25,20 @@ func main() {
 	fmt.Printf("Artem mark: %d\n", studentMarks["Artem"])
 
 	studentMarks["Tom"] = 10
-	fmt.Printf("%v, len = %d\n", studentMarks, len(studentMarks))
+	fmt.Println(studentMarks)
 
 	fmt.Println("---------------------------------")
+
+	// словари передаются по ссылке
+	studentMarks2 := studentMarks
+	studentMarks2["Tom"] = 5
+	fmt.Println(studentMarks)
+
+	setValue(studentMarks, "Tom", 7)
+	fmt.Println(studentMarks)
+
+}
+
+func setValue(dict map[string]int, key string, value int) {
+	dict[key] = value
 }
