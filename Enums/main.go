@@ -1,6 +1,7 @@
 package main
 
 import (
+	"artem/enums/roles"
 	"artem/enums/seasons"
 	"artem/enums/weekdays"
 	"fmt"
@@ -20,4 +21,12 @@ func main() {
 
 	season2 := seasons.Summer
 	fmt.Println(season2)
+
+	fmt.Println("---------------------------------")
+
+	role1, _ := roles.FromString("Admin")
+	fmt.Println(role1)
+
+	role2 := roles.Guest
+	fmt.Println(role2)
 }
