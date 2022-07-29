@@ -50,6 +50,52 @@ func main() {
 	fmt.Println(join(numbers...))
 
 	fmt.Println("--------------------------------------")
+
+	// срезы - как окно в массив
+	planets := [...]string{
+		"Меркурий",
+		"Венера",
+		"Земля",
+		"Марс",
+		"Юпитер",
+		"Сатурн",
+		"Уран",
+		"Нептун",
+		"",
+	}
+	terrestrial := planets[0:4] // или planets[:4]
+	giants := planets[4:8]
+	gasGiants := giants[0:2]   // или giants[:2]
+	iceGiants := giants[2:4:4] // или giants[2:]
+	fmt.Println(planets)
+	fmt.Println(terrestrial)
+	fmt.Println(giants)
+	fmt.Println(gasGiants)
+	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
+
+	iceGiants[0] = "Uran"
+	fmt.Println("\nAfter slice modified:")
+	fmt.Println(planets)
+	fmt.Println(giants)
+
+	planets[2] = "Earth"
+	fmt.Println("\nAfter base array modified:")
+	fmt.Println(planets)
+	fmt.Println(terrestrial)
+
+	iceGiants = append(iceGiants, "Плутон")
+	iceGiants[1] = "Neptun"
+	fmt.Println("\nAfter reallocated slice modified:")
+	fmt.Println(planets)
+	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
+
+	iceGiants = giants[2:4:5 /*ёмкость*/ ]
+	fmt.Printf("\n%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
+	iceGiants = append(iceGiants, "Плутон")
+	iceGiants[1] = "Neptun"
+	fmt.Println("After slice modified without reallocation:")
+	fmt.Println(planets)
+	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 }
 
 func delete(slice []string, index uint) []string {
