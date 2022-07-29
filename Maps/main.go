@@ -9,6 +9,9 @@ func main() {
 	studentMarks := make(map[string]int)
 	fmt.Printf("%v, len = %d\n", studentMarks, len(studentMarks))
 
+	studentMarks = make(map[string]int, 10)
+	fmt.Printf("%v, len = %d\n", studentMarks, len(studentMarks))
+
 	studentMarks = map[string]int{
 		"Tom":   1,
 		"Bob":   2,
@@ -35,6 +38,16 @@ func main() {
 	fmt.Println(studentMarks)
 
 	setValue(studentMarks, "Tom", 7)
+	fmt.Println(studentMarks)
+
+	fmt.Println("---------------------------------")
+
+	// добавление элементов
+	studentMarks["Artem"] = 5
+	fmt.Println(studentMarks)
+
+	// удаление элементов
+	delete(studentMarks, "Alice")
 	fmt.Println(studentMarks)
 
 }
