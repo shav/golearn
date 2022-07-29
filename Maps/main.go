@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 )
 
 func main() {
@@ -56,6 +57,21 @@ func main() {
 	for student, mark := range studentMarks {
 		fmt.Printf("%s: %d\n", student, mark)
 	}
+
+	fmt.Println("---------------------------------")
+
+	// lookup
+	temperatures := []float64{
+		-28.0, 32.0, -31.0, -29.0, -23.0, -29.0, -28.0, -33.0,
+	}
+
+	// Словарь с ключами int и значениями []float64
+	tempGroups := make(map[int][]float64)
+	for _, t := range temperatures {
+		g := int(math.Trunc(t/10) * 10)
+		tempGroups[g] = append(tempGroups[g], t)
+	}
+	fmt.Println(tempGroups)
 
 	fmt.Println("---------------------------------")
 }
