@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -106,6 +107,14 @@ func main() {
 	//tune[0] = 'd' // error: срез строки изменять нельзя
 	neptune = "Poseidon"
 	fmt.Println(tune)
+
+	fmt.Println("--------------------------------------")
+
+	// методы срезов
+	fmt.Println(planets)
+	sort.StringSlice(planets[:]).Sort() // сортировка массива "на месте"
+	fmt.Println("Sorted array:")
+	fmt.Println(planets)
 }
 
 func delete(slice []string, index uint) []string {
