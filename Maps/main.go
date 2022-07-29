@@ -50,6 +50,14 @@ func main() {
 	delete(studentMarks, "Alice")
 	fmt.Println(studentMarks)
 
+	fmt.Println("---------------------------------")
+
+	// итерация по словарю
+	for student, mark := range studentMarks {
+		fmt.Printf("%s: %d\n", student, mark)
+	}
+
+	fmt.Println("---------------------------------")
 }
 
 func setValue(dict map[string]int, key string, value int) {
