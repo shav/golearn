@@ -22,6 +22,23 @@ func main() {
 	}
 	fmt.Printf("%v, len = %d\n", studentMarks, len(studentMarks))
 
+	fmt.Println("---------------------------------")
+
+	// Проверка на равенство
+	//studentMarks_ := map[string]int{
+	//	"Tom":   1,
+	//	"Bob":   2,
+	//	"Sam":   4,
+	//	"Alice": 5,
+	//}
+	// fmt.Printf("map == map (maps are equal by value): %v\n", studentMarks == studentMarks_) // error: словари нельзя сравнивать между собой
+	var notInitializedMap map[string]int
+	fmt.Printf("notInitializedMap == nil: %v\n", notInitializedMap == nil)
+	emptyMap := make(map[string]int)
+	fmt.Printf("emptyMap == nil: %v\n", emptyMap == nil)
+
+	fmt.Println("---------------------------------")
+
 	// обращение к элементам словаря по ключу
 	if val, ok := studentMarks["Tom"]; ok {
 		fmt.Printf("Tom mark: %d\n", val)

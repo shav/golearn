@@ -51,6 +51,7 @@ func main() {
 	fmt.Println(emptyStr)
 
 	str0 := "peace0"
+	str00 := "peace0"
 	fmt.Println(str0)
 
 	var str1 = "peace1"
@@ -96,6 +97,16 @@ line5`
 		fmt.Printf("%c ", c)
 	}
 	fmt.Println()
+
+	fmt.Println("---------------------------------")
+
+	// Проверка на равенство
+	fmt.Printf("str == str (strings are equal by value): %v\n", "abc" == "abc")
+	fmt.Printf("strVar == str (strings are equal by value): %v\n", str0 == "peace0")
+	fmt.Printf("strVar == strVar (strings are equal by value): %v\n", str0 == str00)
+	fmt.Printf("str == str (equal strings with different case): %v\n", "abc" == "ABC")
+	fmt.Printf("str == str (strings are not equal by value): %v\n", "abc" == "def")
+	// fmt.Println(str0 == nil) // error: строки не являются ссылочными типами
 
 	fmt.Println("--------------------------------------")
 

@@ -31,6 +31,15 @@ func main() {
 	colors := [3]string{2: "blue", 0: "red", 1: "green"}
 	fmt.Println(colors)
 
+	fmt.Println("---------------------------------")
+
+	// Проверка на равенство
+	fmt.Printf("array == array (arrays are equal by value): %v\n", numbers5_ == numbers5)
+	fmt.Printf("array == array (arrays are not equal by value): %v\n", numbers52 == numbers5)
+	// fmt.Println(numbers50 == nil) // error: массивы не являются ссылочными типами
+
+	fmt.Println("---------------------------------")
+
 	// инициализация - двумерный массив
 	var table = [4][4]int{{1}, {1, 2}, {1, 2, 3}, {1, 2, 3, 4}}
 	fmt.Println(table)

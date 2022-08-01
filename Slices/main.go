@@ -45,6 +45,17 @@ func main() {
 	numbers = append(numbers, 0, 1, 2, 3, 4, 5)
 	fmt.Printf("%v, len = %d, capacity = %d\n", numbers, len(numbers), cap(numbers))
 
+	fmt.Println("---------------------------------")
+
+	// Проверка на равенство
+	//var users2 = []string{"Tom", "Alice", "Kate"}
+	//var users2_ = []string{"Tom", "Alice", "Kate"}
+	// fmt.Printf("slice == slice (sliced are equal by value): %v\n", users2 == users2_) // error: срезы нельзя сравнивать между собой
+	var notInitializedSlice []string
+	fmt.Printf("notInitializedSlice == nil: %v\n", notInitializedSlice == nil)
+	emptySlice := []string{}
+	fmt.Printf("emptySlice == nil: %v\n", emptySlice == nil)
+
 	fmt.Println("--------------------------------------")
 
 	// срезы - как окно в массив
@@ -85,7 +96,7 @@ func main() {
 	fmt.Println(planets)
 	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 
-	iceGiants = giants[2:4:5 /*ёмкость*/]
+	iceGiants = giants[2:4:5 /*ёмкость*/ ]
 	fmt.Printf("\n%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 	iceGiants = append(iceGiants, "Плутон")
 	iceGiants[1] = "Neptun"
