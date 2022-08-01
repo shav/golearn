@@ -6,6 +6,7 @@ import (
 
 func main() {
 	defer finish()
+	defer globalErrorHandler()
 	fmt.Println("Program has been started")
 	fmt.Println("Program is working")
 
@@ -22,4 +23,10 @@ func divide(x, y float64) float64 {
 		panic("Division by zero!")
 	}
 	return x / y
+}
+
+func globalErrorHandler() {
+	if e := recover(); e != nil {
+		fmt.Println("Error: ", e)
+	}
 }
