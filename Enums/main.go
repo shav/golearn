@@ -2,6 +2,7 @@ package main
 
 import (
 	"artem/enums/calendar"
+	"artem/enums/imagetypes"
 	"artem/enums/roles"
 	"artem/enums/seasons"
 	"artem/enums/weekdays"
@@ -38,4 +39,12 @@ func main() {
 
 	month2 := calendar.Months.April
 	fmt.Println(month2)
+
+	fmt.Println("---------------------------------")
+
+	imageType1, _ := imagetypes.ParseImageType("Png")
+	fmt.Println(imageType1)
+
+	imageType2 := imagetypes.Gif
+	fmt.Println(imageType2)
 }
