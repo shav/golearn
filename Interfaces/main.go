@@ -1,0 +1,128 @@
+package main
+
+import (
+	"fmt"
+)
+
+type IMovable interface {
+	Move()
+}
+
+type IAlive interface {
+	Eat()
+}
+
+type ISleeper interface {
+	Sleep()
+}
+
+type IAnimal interface {
+	IAlive
+	ISleeper
+	IMovable
+}
+
+type Animal struct {
+	Name string
+}
+
+func (animal Animal) Eat() {
+	fmt.Printf("%s eats\n", animal.Name)
+}
+
+func (animal Animal) Sleep() {
+	fmt.Printf("%s sleeps\n", animal.Name)
+}
+
+func (animal Animal) Move() {
+	fmt.Printf("%s moves\n", animal.Name)
+}
+
+type Dog struct {
+	Animal
+}
+
+func (dog Dog) Bark() {
+	fmt.Printf("%s barks\n", dog.Name)
+}
+
+type Cat struct {
+	Animal
+}
+
+func (cat Cat) Meow() {
+	fmt.Printf("%s meows\n", cat.Name)
+}
+
+func (cat Cat) Sleep() {
+	fmt.Println("Cat zzzzzz...")
+	cat.Animal.Sleep()
+}
+
+type Plane struct {
+	Model string
+}
+
+func (plane Plane) Move() {
+	fmt.Printf("%s fly\n", plane.Model)
+}
+
+func main() {
+	var cat = Cat{Animal{Name: "Murka"}}
+	var dog = Dog{Animal{Name: "Rex"}}
+	var airbus = Plane{Model: "Airbus"}
+
+	// Вызов методов интерфейса
+	var animal IAnimal = cat
+	animal.Sleep()
+
+	animal = dog
+	animal.Sleep()
+	// animal.Bark() // compile error: На этапе компиляции неизвестно, что по факту в переменной animal хранится Dog
+
+	// animal = airbus // error: Plane не реализует интерфейс IAnimal
+
+	fmt.Println("--------------------------------------")
+
+	// Присваивание интерфейсных переменных
+	var alive IAlive = animal
+	alive.Eat()
+
+	var sleeper ISleeper = dog
+	sleeper.Sleep()
+
+	// error: интерфейсы ISleeper и IAlive несовместимы между собой, хоть и по факту в переменной alive содержится объект, реализующий ISleeper
+	// sleeper = alive
+	// Здесь аналогично:
+	// animal = alive
+	// Нужно в runtime проверять через утверждение типа, реализует ли конкретный объект заданный интерфейс
+	if animal, ok := alive.(IAnimal); ok {
+		animal.Move()
+	}
+
+	fmt.Println("--------------------------------------")
+
+	// Проверка на равенство
+	var animal1 IAnimal = dog
+	var animal2 IAnimal = dog
+	var animal3 IAnimal = cat
+	fmt.Printf("interface == interface (equals): %v\n", animal1 == animal2)
+	fmt.Printf("interface == interface (not equals): %v\n", animal1 == animal3)
+	fmt.Printf("interface == object (equals): %v\n", animal1 == dog)
+	fmt.Printf("interface == object (not equals): %v\n", animal1 == cat)
+
+	fmt.Println("--------------------------------------")
+
+	// Полиморфизм
+	movers := []IMovable{cat, dog, airbus}
+	for _, mover := range movers {
+		mover.Move()
+	}
+
+	fmt.Println("--------------------------------------")
+
+	// Ковариантность/контравариантность
+	animals := []IAnimal{cat, dog}
+	// movers = animals // error: из коробки ковариантность не работает
+	fmt.Println(animals)
+}
