@@ -31,6 +31,42 @@ func (person *Person) setNameByRef(name string) {
 	person.Name = name
 }
 
+// -------------------------------------------------------------------------------------
+
+// Наследование
+type Animal struct {
+	Name string
+}
+
+func (animal *Animal) Eat() {
+	fmt.Printf("%s eats\n", animal.Name)
+}
+
+func (animal *Animal) Sleep() {
+	fmt.Printf("%s sleeps\n", animal.Name)
+}
+
+type Dog struct {
+	Animal
+}
+
+func (dog *Dog) Bark() {
+	fmt.Printf("%s barks\n", dog.Name)
+}
+
+type Cat struct {
+	Animal
+}
+
+func (cat *Cat) Meow() {
+	fmt.Printf("%s meows\n", cat.Name)
+}
+
+func (cat *Cat) Sleep() {
+	cat.Animal.Sleep()
+	fmt.Printf("Cat zzzzzz...")
+}
+
 func main() {
 	// Инициализация
 	var person = Person{}
@@ -101,4 +137,16 @@ func main() {
 	fmt.Println(persons)
 
 	fmt.Println("--------------------------------------")
+
+	// Наследование aka Композиция
+	var cat = Cat{Animal{Name: "Murka"}}
+	cat.Eat()
+	cat.Meow()
+
+	var dog = Dog{Animal{Name: "Rex"}}
+	dog.Eat()
+	dog.Bark()
+
+	// var animal Animal = cat // error: наследование в go не настоящее :)
+	// animal.Sleep()
 }
