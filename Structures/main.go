@@ -87,4 +87,10 @@ func main() {
 	fmt.Println(string(tomStr))
 
 	fmt.Println("--------------------------------------")
+
+	// Список из структур
+	persons := []Person{person, tom}
+	fmt.Println(persons)
+
+	fmt.Println("--------------------------------------")
 }
