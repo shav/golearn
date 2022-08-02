@@ -74,6 +74,13 @@ func main() {
 
 	fmt.Println("--------------------------------------")
 
+	// Проверка на равенство
+	tom2 = tom
+	fmt.Printf("struct == struct (equals): %v\n", tom == tom2)
+	fmt.Printf("struct == struct (not equals): %v\n", tom == person)
+
+	fmt.Println("--------------------------------------")
+
 	// Вложенные ссылки на структуры
 	tom.Manager = &person
 	tomStr, _ := json.MarshalIndent(tom, "", "  ")
