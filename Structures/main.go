@@ -17,6 +17,11 @@ type Person struct {
 	Manager *Person
 }
 
+// Конструктор
+func NewPerson(name string, age int) Person {
+	return Person{name, age, Contact{}, nil}
+}
+
 // Методы структур
 func (person Person) setName(name string) {
 	person.Name = name
@@ -35,6 +40,9 @@ func main() {
 	fmt.Println(person)
 
 	person = Person{Name: "Artem", Age: 31}
+	fmt.Println(person)
+
+	person = NewPerson("Artem", 20)
 	fmt.Println(person)
 
 	fmt.Println("--------------------------------------")
