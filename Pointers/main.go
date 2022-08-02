@@ -107,8 +107,12 @@ func main() {
 	*pName = "ARTEM"
 	fmt.Println(person)
 
-	pPerson = &Person{name: "Vovan", age: 29}
-	fmt.Println(*pPerson)
+	pPerson3 := &Person{name: "Vovan", age: 29}
+	fmt.Println(*pPerson3)
+
+	var pPerson2 = &person
+	fmt.Printf("*struct == *struct (pointers to the same object): %v\n", pPerson2 == pPerson)
+	fmt.Printf("*struct == *struct (pointers to different objects): %v\n", pPerson3 == pPerson)
 
 	fmt.Println("--------------------------------------")
 
