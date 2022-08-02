@@ -63,8 +63,8 @@ func (cat *Cat) Meow() {
 }
 
 func (cat *Cat) Sleep() {
+	fmt.Println("Cat zzzzzz...")
 	cat.Animal.Sleep()
-	fmt.Printf("Cat zzzzzz...")
 }
 
 func main() {
@@ -140,11 +140,11 @@ func main() {
 
 	// Наследование aka Композиция
 	var cat = Cat{Animal{Name: "Murka"}}
-	cat.Eat()
+	cat.Sleep()
 	cat.Meow()
 
 	var dog = Dog{Animal{Name: "Rex"}}
-	dog.Eat()
+	dog.Sleep()
 	dog.Bark()
 
 	// var animal Animal = cat // error: наследование в go не настоящее :)
