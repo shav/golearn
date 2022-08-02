@@ -99,11 +99,16 @@ func main() {
 	var person = Person{name: "Artem", age: 31}
 	var pPerson = &person
 	fmt.Println(person)
+
 	pPerson.age = 20
 	fmt.Println(person)
+
 	var pName = &person.name
 	*pName = "ARTEM"
 	fmt.Println(person)
+
+	pPerson = &Person{name: "Vovan", age: 29}
+	fmt.Println(*pPerson)
 
 	fmt.Println("--------------------------------------")
 
