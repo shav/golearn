@@ -44,4 +44,28 @@ func main() {
 	fmt.Println(tom)
 
 	fmt.Println("--------------------------------------")
+
+	// Структуры являются типом-значением
+	tom2 := tom
+	tom2.name = "Tom2"
+	fmt.Println("Copied struct:")
+	fmt.Println(tom2)
+	fmt.Println("Original struct:")
+	fmt.Println(tom)
+	fmt.Println()
+
+	tom.setName("TOM")
+	fmt.Println("set name (by value):")
+	fmt.Println(tom)
+	tom.setNameByRef("TOM")
+	fmt.Println("set name (by ref):")
+	fmt.Println(tom)
+}
+
+func (person Person) setName(name string) {
+	person.name = name
+}
+
+func (person *Person) setNameByRef(name string) {
+	person.name = name
 }
