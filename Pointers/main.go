@@ -110,6 +110,11 @@ func main() {
 	pPerson3 := &Person{name: "Vovan", age: 29}
 	fmt.Println(*pPerson3)
 
+	pPerson4 := new(Person)
+	pPerson4.name = "Dimon"
+	pPerson4.age = 10
+	fmt.Println(*pPerson4)
+
 	var pPerson2 = &person
 	fmt.Printf("*struct == *struct (pointers to the same object): %v\n", pPerson2 == pPerson)
 	fmt.Printf("*struct == *struct (pointers to different objects): %v\n", pPerson3 == pPerson)
