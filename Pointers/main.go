@@ -125,6 +125,10 @@ func main() {
 
 	incrementRef(&num1)
 	fmt.Printf("increment(*int): %d\n", num1)
+
+	pNum1 := getRef(&num1)
+	*pNum1 += 10
+	fmt.Printf("return *int: %d\n", num1)
 }
 
 func increment(num int) int {
@@ -135,4 +139,8 @@ func increment(num int) int {
 func incrementRef(num *int) int {
 	*num++
 	return *num
+}
+
+func getRef(num *int) *int {
+	return num
 }
