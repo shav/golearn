@@ -17,6 +17,15 @@ type Person struct {
 	Manager *Person
 }
 
+// Методы структур
+func (person Person) setName(name string) {
+	person.Name = name
+}
+
+func (person *Person) setNameByRef(name string) {
+	person.Name = name
+}
+
 func main() {
 	// Инициализация
 	var person = Person{}
@@ -71,12 +80,4 @@ func main() {
 	fmt.Println(string(tomStr))
 
 	fmt.Println("--------------------------------------")
-}
-
-func (person Person) setName(name string) {
-	person.Name = name
-}
-
-func (person *Person) setNameByRef(name string) {
-	person.Name = name
 }
