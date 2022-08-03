@@ -112,8 +112,16 @@ func main() {
 	tom.setName("TOM")
 	fmt.Println("set Name (by value):")
 	fmt.Println(tom)
+
 	tom.setNameByRef("TOM")
 	fmt.Println("set Name (by ref):")
+	fmt.Println(tom)
+
+	// Так тоже не работает, не смотря на то что метод вызывается через указатель -
+	// всё-равно он разыменовывается и передаётся в метод по значению.
+	pTom := &tom
+	pTom.setName("TOM2")
+	fmt.Println("set Name (by value via pointer):")
 	fmt.Println(tom)
 
 	fmt.Println("--------------------------------------")

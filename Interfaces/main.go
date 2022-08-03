@@ -10,6 +10,11 @@ type IMovable interface {
 
 type IAlive interface {
 	Eat()
+	SetName(name string)
+}
+
+type INaming interface {
+	SetName2(name string)
 }
 
 type ISleeper interface {
@@ -36,6 +41,14 @@ func (animal Animal) Sleep() {
 
 func (animal Animal) Move() {
 	fmt.Printf("%s moves\n", animal.Name)
+}
+
+func (animal Animal) SetName(name string) {
+	animal.Name = name
+}
+
+func (animal *Animal) SetName2(name string) {
+	animal.Name = name
 }
 
 type Dog struct {
@@ -81,6 +94,20 @@ func main() {
 	// animal.Bark() // compile error: На этапе компиляции неизвестно, что по факту в переменной animal хранится Dog
 
 	// animal = airbus // error: Plane не реализует интерфейс IAnimal
+
+	// Так не работает - объект передаётся в метод по значению
+	cat.SetName("MURKA")
+	fmt.Println(cat)
+
+	// Так тоже не работает, не смотря на то что метод вызывается через указатель -
+	// всё-равно он разыменовывается и передаётся в метод по значению.
+	pCat := &cat
+	pCat.SetName("MURKA")
+	fmt.Println(cat)
+	// Для этого нужно реализовывать интерефейс с модифицирующими методами через указатели!
+	var namedAnimal INaming = &cat
+	namedAnimal.SetName2("MURKA2")
+	fmt.Println(cat)
 
 	fmt.Println("--------------------------------------")
 
