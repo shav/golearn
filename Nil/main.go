@@ -20,8 +20,14 @@ func main() {
 	// Срезы
 	var slice []int
 	fmt.Printf("no-init-slice == nil: %v\n", slice == nil)
+
 	slice = nilSlice()
 	fmt.Printf("nil-init-slice == nil: %v\n", slice == nil)
+
+	// fmt.Println(slice[0]) // error: index out of range (не NullReferenceException)
+	fmt.Println(slice[:])          // возвращает пустой врез []
+	fmt.Println(append(slice, 10)) // вообще успещно добавляет элемент, без NRE
+
 	slice = []int{}
 	fmt.Printf("empty-slice == nil: %v\n", slice == nil)
 
@@ -30,8 +36,14 @@ func main() {
 	// Словари
 	var myMap map[string]int
 	fmt.Printf("no-init-map == nil: %v\n", myMap == nil)
+
 	myMap = nilMap()
 	fmt.Printf("nil-init-map == nil: %v\n", myMap == nil)
+
+	fmt.Println(myMap["Hello"])
+	// myMap["Hello"] = 10 // error: NRE
+	delete(myMap, "Hello")
+
 	myMap = map[string]int{}
 	fmt.Printf("empty-map == nil: %v\n", myMap == nil)
 
@@ -40,8 +52,13 @@ func main() {
 	// Указатели на базовые типы
 	var basicPointer *int
 	fmt.Printf("no-init-basic-pointer == nil: %v\n", basicPointer == nil)
+
 	basicPointer = nilBasicPointer()
 	fmt.Printf("nil-init-basic-pointer == nil: %v\n", basicPointer == nil)
+
+	// fmt.Println(*basicPointer) // NRE
+	// *basicPointer = 10 // NRE
+
 	basicPointer = (*int)(nil)
 	fmt.Printf("typed-nil-init-basic-pointer == nil: %v\n", basicPointer == nil)
 
@@ -50,8 +67,13 @@ func main() {
 	// Указатели на структуры
 	var structPointer *Person
 	fmt.Printf("no-init-struct-pointer == nil: %v\n", structPointer == nil)
+
 	structPointer = nilStructPointer()
 	fmt.Printf("nil-init-struct-pointer == nil: %v\n", structPointer == nil)
+
+	// fmt.Println(*structPointer) // NRE
+	// *structPointer = Person{}   // NRE
+
 	structPointer = (*Person)(nil)
 	fmt.Printf("typed-nil-init-struct-pointer == nil: %v\n", structPointer == nil)
 
