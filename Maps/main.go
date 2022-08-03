@@ -78,6 +78,17 @@ func main() {
 
 	fmt.Println("---------------------------------")
 
+	// так лучше не делать - получается полный треш, т.к. по словарям цикл итерируется в рандомном порядке
+	// и по вновь добавленным элементам может как проитерироваться, так и нет
+	for student, mark := range studentMarks {
+		fmt.Printf("%s: %d\n", student, mark)
+		studentMarks[student+"2"] = mark * 2
+	}
+	fmt.Println()
+	fmt.Println(studentMarks)
+
+	fmt.Println("---------------------------------")
+
 	// lookup
 	temperatures := []float64{
 		-28.0, 32.0, -31.0, -29.0, -23.0, -29.0, -28.0, -33.0,

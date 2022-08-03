@@ -45,6 +45,15 @@ func main() {
 	numbers = append(numbers, 0, 1, 2, 3, 4, 5)
 	fmt.Printf("%v, len = %d, capacity = %d\n", numbers, len(numbers), cap(numbers))
 
+	// range вычисляется перед выполнением цикла -
+	// все элементы, добавленные или удалённые во время итераций, в цикле не учитываются
+	for index, num := range numbers {
+		fmt.Printf("%d, ", num)
+		numbers = append(numbers, 6+index)
+	}
+	fmt.Println()
+	fmt.Println(numbers)
+
 	fmt.Println("---------------------------------")
 
 	// Копирование срезов
@@ -108,7 +117,7 @@ func main() {
 	fmt.Println(planets)
 	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 
-	iceGiants = giants[2:4:5 /*ёмкость*/ ]
+	iceGiants = giants[2:4:5 /*ёмкость*/]
 	fmt.Printf("\n%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 	iceGiants = append(iceGiants, "Плутон")
 	iceGiants[1] = "Neptun"
