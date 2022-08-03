@@ -25,7 +25,10 @@ func main() {
 	fmt.Printf("nil-init-slice == nil: %v\n", slice == nil)
 
 	// fmt.Println(slice[0]) // error: index out of range (не NullReferenceException)
-	fmt.Println(slice[:])          // возвращает пустой врез []
+	fmt.Println(slice[:]) // возвращает пустой врез []
+	for _, value := range slice {
+		fmt.Println(value)
+	}
 	fmt.Println(append(slice, 10)) // вообще успещно добавляет элемент, без NRE
 
 	slice = []int{}
@@ -43,6 +46,9 @@ func main() {
 	fmt.Println(myMap["Hello"])
 	// myMap["Hello"] = 10 // error: NRE
 	delete(myMap, "Hello")
+	for key, value := range myMap {
+		fmt.Println(key, value)
+	}
 
 	myMap = map[string]int{}
 	fmt.Printf("empty-map == nil: %v\n", myMap == nil)
