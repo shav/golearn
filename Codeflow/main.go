@@ -32,6 +32,7 @@ func main() {
 	}
 	fmt.Println()
 
+	// while
 	var pow = 1
 	for pow <= 1024 {
 		fmt.Printf("%d, ", pow)
@@ -41,6 +42,7 @@ func main() {
 
 	rand.Seed(time.Now().Unix())
 	var degrees = 0
+	// бесконечный цикл
 	for {
 		fmt.Printf("%d, ", degrees)
 		degrees++
@@ -53,6 +55,7 @@ func main() {
 	}
 	fmt.Println()
 
+	// foreach
 	var users = [3]string{"Tom", "Alice", "Kate"}
 	for index, value := range users {
 		fmt.Println(index, value)
@@ -75,12 +78,24 @@ func main() {
 
 	fmt.Println("--------------------------------------")
 
+	// Вложенный цикл
+outerLoopLabel:
 	for i := 1; i < 10; i++ {
 		for j := 1; j < 10; j++ {
+			if j == 5 {
+				continue
+			}
+			if j == i {
+				break
+			}
+			if i*j > 63 {
+				break outerLoopLabel
+			}
 			fmt.Print(i*j, "\t")
 		}
 		fmt.Println()
 	}
+	fmt.Println()
 
 	fmt.Println("--------------------------------------")
 
@@ -88,6 +103,7 @@ func main() {
 	switch time.Now().Weekday() {
 	case time.Monday:
 		fmt.Println("Сегодня понедельник.")
+		// break добавляется автоматически, в отличие от других ЯП
 	case time.Tuesday:
 		fmt.Println("Сегодня вторник.")
 	case time.Wednesday:
