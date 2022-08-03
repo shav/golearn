@@ -73,6 +73,91 @@ func main() {
 	fmt.Println("--------------------------------------")
 
 	// Сериализация в yaml
-	tomJson, _ = yaml.Marshal(tom)
-	fmt.Println(string(tomJson))
+	tomYaml, _ := yaml.Marshal(tom)
+	fmt.Println(string(tomYaml))
+
+	fmt.Println("-------------------------------------------------------------------")
+
+	// Десериализация из json
+	// Десериализация базовых типов
+	numJson = []byte("2.71")
+	json.Unmarshal(numJson, &num)
+	fmt.Println(num)
+
+	strJson = []byte("\"Hi,\\nArtem!\"")
+	json.Unmarshal(strJson, &str)
+	fmt.Println(str)
+
+	// Десериализация в переменную несоответствующего типа
+	strJson = []byte("Hello")
+	var num1 int
+	err := json.Unmarshal(strJson, &num1)
+	fmt.Println(err)
+	fmt.Println(num)
+
+	fmt.Println("--------------------------------------")
+
+	// Десериализация срезов
+	sliceJson = []byte("[ 10,  11,12   ]")
+	json.Unmarshal(sliceJson, &slice)
+	fmt.Println(slice)
+
+	fmt.Println("--------------------------------------")
+
+	// Десериализация словарей
+	mapJson = []byte(" {\"Artem\": 10,  \"Dimon\":   30 ,   \"Vovan\" : 20} ")
+	json.Unmarshal(mapJson, &myMap)
+	fmt.Println(myMap)
+
+	fmt.Println("--------------------------------------")
+
+	// Десериализация структур
+	tomJson = []byte(`{
+	  "Name": "Tom",
+	  "Age": 20,
+	    "Grades": [10,20,30 ],
+	  "Contact":     {
+		"Email": "tom@gmail.com",
+		"Phone": "+7(965)123-456-78"
+	  },
+	  "Manager": {
+		"Name": "Artem",
+		"Age": 10,
+		"Grades": null,
+		"Contact": {
+		  "Email": "",
+		  "Phone": ""
+		},
+		"Manager": null
+	  }
+	}
+	`)
+	json.Unmarshal(tomJson, &tom)
+	fmt.Println(tom)
+	fmt.Println(tom.Manager)
+
+	fmt.Println("--------------------------------------")
+
+	// Десериализация из yaml
+	tomYaml = []byte(`name: Tom
+age: 24
+grades:
+    - 111
+    - 222
+    - 333
+    - 777
+contact:
+    email: tom@gmail.com
+    phone: "+1234567899"
+manager:
+    name: Artem
+    age: 50
+    grades: []
+    contact:
+        email: ""
+        phone: ""
+`)
+	yaml.Unmarshal(tomYaml, &tom)
+	fmt.Println(tom)
+	fmt.Println(tom.Manager)
 }
