@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"math/rand"
 	"time"
 )
@@ -164,6 +165,21 @@ outerLoopLabel:
 		fmt.Println("PM")
 	}
 
+	// Значения case-веток не обязаны быть константами!
+	binary := 16
+	switch binary {
+	case pow2(1):
+		fmt.Println("pow2(1)")
+	case pow2(2):
+		fmt.Println("pow2(2)")
+	case pow2(3):
+		fmt.Println("pow2(3)")
+	case pow2(4):
+		fmt.Println("pow2(4)")
+	default:
+		fmt.Println("pow2(undefined)")
+	}
+
 	nextStop := "B"
 	fmt.Print("Stops ahead of us: ")
 	switch nextStop {
@@ -200,4 +216,26 @@ outerLoopLabel:
 	default:
 		fmt.Println("unknown")
 	}
+
+	str = "abc_z_def"
+ForLabel:
+	for _, char := range str {
+		switch char {
+		case 'a':
+			fmt.Print("A")
+		case 'b':
+			fmt.Print("B")
+		case 'c':
+			fmt.Print("C")
+		case 'd':
+			fmt.Print("D")
+		case 'z':
+			fmt.Print("Z")
+			break ForLabel // выход из цикла (просто break выполнит выход из case-ветки)
+		}
+	}
+}
+
+func pow2(num int) int {
+	return int(math.Pow(2, float64(num)))
 }
