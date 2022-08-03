@@ -47,6 +47,18 @@ func main() {
 
 	fmt.Println("---------------------------------")
 
+	// Копирование срезов
+	fmt.Println("Copied slice:")
+	var numbers2 = make([]int, 2)
+	copy(numbers2, numbers)
+	fmt.Println(numbers2)
+
+	var numbers3 = make([]int, 20)
+	copy(numbers3, numbers)
+	fmt.Println(numbers3)
+
+	fmt.Println("---------------------------------")
+
 	// Проверка на равенство
 	//var users2 = []string{"Tom", "Alice", "Kate"}
 	//var users2_ = []string{"Tom", "Alice", "Kate"}
@@ -96,7 +108,7 @@ func main() {
 	fmt.Println(planets)
 	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 
-	iceGiants = giants[2:4:5 /*ёмкость*/]
+	iceGiants = giants[2:4:5 /*ёмкость*/ ]
 	fmt.Printf("\n%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 	iceGiants = append(iceGiants, "Плутон")
 	iceGiants[1] = "Neptun"
@@ -127,7 +139,7 @@ func main() {
 	// срез как аргумент функции с переменным числом параметров
 	fmt.Println(join(numbers...))
 
-	// передача срезов в качестве аргумента функции (по значению)
+	// передача срезов в качестве аргумента функции (по ссылке)
 	fmt.Println("Original slice:")
 	fmt.Println(users)
 	setValue(users, 0, "Том")
