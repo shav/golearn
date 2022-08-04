@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"encoding/csv"
 	"fmt"
+	"html"
+	"net/url"
 	"os"
 	"regexp"
 	"strings"
@@ -80,8 +82,22 @@ line5`
 	var rawStr = `line1\nline2`
 	fmt.Println(rawStr)
 
-	var specStr = "\tw1\t\"w2\"\\w3"
-	fmt.Println(specStr)
+	var specialStr = "\tw1\t\"w2\"\\w3"
+	fmt.Println(specialStr)
+
+	fmt.Println("---------------------------------")
+
+	// escaping
+	var escapedStr = "`" + "Escaped\\,\"string\"" + "`"
+	fmt.Println(escapedStr)
+
+	var htmlString = `"Foo's Bar" <foobar@example.com>`
+	fmt.Println(html.EscapeString(htmlString))
+
+	const urlStr = `Foo's Bar?`
+	fmt.Println(url.PathEscape(urlStr))
+
+	fmt.Println("---------------------------------")
 
 	fmt.Printf("ascii str[1]: %c\n", str0[1])
 	fmt.Printf("unicode str[1]: %c\n", unicodeStr[1])
