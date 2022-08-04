@@ -44,6 +44,9 @@ func main() {
 	fmt.Printf("%c: %[1]v (%d bytes)\n", root, len(rootStr))
 	fmt.Println([]byte(rootStr))
 
+	const unicodeChar = '\u00e9'
+	fmt.Printf("%c\n", unicodeChar)
+
 	fmt.Println("--------------------------------------")
 
 	// Строки
@@ -62,6 +65,9 @@ func main() {
 
 	var unicodeStr string = "abcπγ本"
 	fmt.Println(unicodeStr)
+
+	var unicodeStr2 string = "caf\u00e9"
+	fmt.Println(unicodeStr2)
 
 	var multilineStr1 = "line1\nline2"
 	fmt.Println(multilineStr1)
