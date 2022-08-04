@@ -38,6 +38,12 @@ func main() {
 	fmt.Println(num6)
 	fmt.Println(num7)
 
+	// переобъявление существующей переменной num7
+	num7, num8 := 77, 80
+	// num7, str := "hello", "world" // error: тип переменной при переобъявлении менять нельзя
+	fmt.Println(num7)
+	fmt.Println(num8)
+
 	// область видимости переменных
 	fmt.Printf("globalVar: %d\n", globalVar)
 	if true {
