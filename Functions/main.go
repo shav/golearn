@@ -95,8 +95,12 @@ func main() {
 
 	fmt.Println("---------------------------------")
 
+	// Переменные типа "Функция"
+	var mult Operation
+	// mult(1, 1) // NRE: функциональная переменная не инициализирована
+
 	// анонимная функция
-	var mult Operation = func(x int, y int) int { return x * y }
+	mult = func(x int, y int) int { return x * y }
 	fmt.Printf("multiply(%d, %d): %d\n", n1, n2, mult(n1, n2))
 
 	// функция как возвращаемое значение другой функции
