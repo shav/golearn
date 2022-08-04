@@ -122,6 +122,22 @@ line5`
 
 	fmt.Println("---------------------------------")
 
+	// Конвертация в массив байт и символов
+	strToBytes := []byte("ABC€")
+	fmt.Println(strToBytes)
+
+	strFormBytes := string([]byte{65, 66, 226, 130, 172})
+	fmt.Println(strFormBytes)
+
+	strToChars := []rune("ABC€")
+	fmt.Println(strToChars)
+	fmt.Printf("%U\n", strToChars)
+
+	strFromChars := string([]rune{'\u0041', '\u0042', '\u20AC'})
+	fmt.Println(strFromChars)
+
+	fmt.Println("---------------------------------")
+
 	// Проверка на равенство
 	fmt.Printf("str == str (strings are equal by value): %v\n", "abc" == "abc")
 	fmt.Printf("strVar == str (strings are equal by value): %v\n", str0 == "peace0")
@@ -315,6 +331,7 @@ line5`
 	stringWithSpaces := "\t\t\n   Go \tis\n Awesome \t\t"
 	trimResult := strings.TrimSpace(stringWithSpaces)
 	fmt.Println(trimResult)
+
 	r := regexp.MustCompile("\\s+")
 	replace := r.ReplaceAllString(stringWithSpaces, " ")
 	fmt.Println(replace)
