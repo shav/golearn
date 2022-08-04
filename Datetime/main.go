@@ -32,6 +32,14 @@ func main() {
 	izhTimeFromMsk := mskDateTime.In(izhTimeZone)
 	fmt.Println("Datetime MSK -> IZH: ", izhTimeFromMsk)
 
+	// Почему-то не всегда работает, видимо зависит от ОС?
+	location, err := time.LoadLocation("Asia/Shanghai")
+	if err == nil {
+		fmt.Println(err)
+	} else {
+		fmt.Println(location)
+	}
+
 	fmt.Println("--------------------------------------")
 
 	// форматирование дат
