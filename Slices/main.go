@@ -13,8 +13,14 @@ func main() {
 	var users = []string{"Tom", "Alice", "Kate"}
 	fmt.Printf("%v, len = %d, capacity = %d\n", users, len(users), cap(users))
 
+	// Добавление элемента в список
 	users = append(users, "Bob")
 	fmt.Printf("%v, len = %d, capacity = %d\n", users, len(users), cap(users))
+
+	// Конкатенация списков
+	var users1 = []string{"Artem", "Vovan", "Dimon"}
+	users1 = append(users1, users...)
+	fmt.Println(users1)
 
 	fmt.Println(users[3])
 	//fmt.Println(users[5]) // error: index out of range (len <= index <= capacity)
@@ -146,7 +152,7 @@ func main() {
 	fmt.Println(planets)
 	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 
-	iceGiants = giants[2:4:5 /*ёмкость*/]
+	iceGiants = giants[2:4:5 /*ёмкость*/ ]
 	fmt.Printf("\n%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 	iceGiants = append(iceGiants, "Плутон")
 	iceGiants[1] = "Neptun"
