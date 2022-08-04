@@ -78,6 +78,19 @@ func main() {
 
 	fmt.Println("---------------------------------")
 
+	// Получение списка ключей и значений словаря
+	keys := make([]string, 0, len(studentMarks))
+	values := make([]int, 0, len(studentMarks))
+
+	for k, v := range studentMarks {
+		keys = append(keys, k)
+		values = append(values, v)
+	}
+	fmt.Println(keys)
+	fmt.Println(values)
+
+	fmt.Println("---------------------------------")
+
 	// так лучше не делать - получается полный треш, т.к. по словарям цикл итерируется в рандомном порядке
 	// и по вновь добавленным элементам может как проитерироваться, так и нет
 	for student, mark := range studentMarks {
@@ -89,13 +102,11 @@ func main() {
 
 	fmt.Println("---------------------------------")
 
-	// lookup
+	// lookup (по каждому ключу может храниться несколько значений):
 	temperatures := []float64{
 		-28.0, 32.0, -31.0, -29.0, -23.0, -29.0, -28.0, -33.0,
 	}
-
-	// Словарь с ключами int и значениями []float64
-	tempGroups := make(map[int][]float64)
+	tempGroups := make(map[int][]float64) // Словарь с ключами int и значениями []float64
 	for _, t := range temperatures {
 		g := int(math.Trunc(t/10) * 10)
 		tempGroups[g] = append(tempGroups[g], t)
@@ -104,6 +115,7 @@ func main() {
 
 	fmt.Println("---------------------------------")
 
+	// Имплементация множеств на основе словаря
 	set := NewSet()
 	set.add(1, 2, 3)
 	set.add(1, 2)
