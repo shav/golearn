@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"sort"
 	"strings"
@@ -69,11 +70,24 @@ func main() {
 	fmt.Println("---------------------------------")
 
 	// Проверка на равенство
-	//var users2 = []string{"Tom", "Alice", "Kate"}
-	//var users2_ = []string{"Tom", "Alice", "Kate"}
-	// fmt.Printf("slice == slice (sliced are equal by value): %v\n", users2 == users2_) // error: срезы нельзя сравнивать между собой
+	var users2 = []string{"Tom", "Alice", "Kate"}
+	var users20 = []string{"Tom", "Alice", "Kate"}
+	var users21 = []string{"Tom", "Alice", "Artem"}
+	var users22 = []string{"Tom", "Alice"}
+	// fmt.Printf("slice == slice (sliced are equal by value): %v\n", users2 == users20) // error: срезы нельзя сравнивать между собой через оператор ==
+	fmt.Printf("slice == slice (equals): %v\n", Equal(users2, users20))
+	fmt.Printf("slice == slice (not equals): %v\n", Equal(users2, users21))
+	fmt.Printf("slice == slice (not equals): %v\n", Equal(users2, users22))
+
+	var byteSlice1 = []byte("Hello")
+	var byteSlice11 = []byte("Hello")
+	var byteSlice2 = []byte("World")
+	fmt.Printf("byte slice == byte slice (equals): %v\n", bytes.Equal(byteSlice1, byteSlice11))
+	fmt.Printf("byte slice == byte slice (not equals): %v\n", bytes.Equal(byteSlice1, byteSlice2))
+
 	var notInitializedSlice []string
 	fmt.Printf("notInitializedSlice == nil: %v\n", notInitializedSlice == nil)
+
 	emptySlice := []string{}
 	fmt.Printf("emptySlice == nil: %v\n", emptySlice == nil)
 
@@ -117,7 +131,7 @@ func main() {
 	fmt.Println(planets)
 	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 
-	iceGiants = giants[2:4:5 /*ёмкость*/]
+	iceGiants = giants[2:4:5 /*ёмкость*/ ]
 	fmt.Printf("\n%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 	iceGiants = append(iceGiants, "Плутон")
 	iceGiants[1] = "Neptun"
@@ -170,4 +184,16 @@ func join(numbers ...int) string {
 
 func setValue(slice []string, index uint, value string) {
 	slice[index] = value
+}
+
+func Equal(a, b []string) bool {
+	if len(a) != len(b) {
+		return false
+	}
+	for i, v := range a {
+		if v != b[i] {
+			return false
+		}
+	}
+	return true
 }
