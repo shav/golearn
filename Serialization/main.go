@@ -22,6 +22,7 @@ type Person struct {
 	Contact    Contact
 	Birthday   DateTime `json:"birthdate"`
 	Manager    *Person  `json:"mgr"`
+	private    string   // приватные поля игнорируются при сериализации/десериализации
 }
 
 type DateTime struct {
@@ -167,7 +168,8 @@ func main() {
 		  "Phone": ""
 		},
 		"mgr": null
-	  }
+	  },
+      "ExtraField": "Will be ignored on deserialization"
 	}
 	`)
 	json.Unmarshal(tomJson, &tom2)
