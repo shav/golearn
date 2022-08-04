@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 func main() {
@@ -18,4 +19,19 @@ func main() {
 	fmt.Printf("%s: %s\n", file, pattern)
 
 	fmt.Println("--------------------------------------")
+
+	// Список переменных окружения
+	for _, s := range os.Environ() {
+		kv := strings.SplitN(s, "=", 2) // unpacks "key=value"
+		fmt.Printf("%q = %q\n", kv[0], kv[1])
+	}
+
+	fmt.Println("--------------------------------------")
+
+	// Модификация переменных окружения
+	fmt.Printf("%q\n", os.Getenv("ARTEM"))
+	os.Setenv("ARTEM", "/bin/dash")
+	fmt.Printf("%q\n", os.Getenv("ARTEM"))
+	os.Unsetenv("ARTEM")
+	fmt.Printf("%q\n", os.Getenv("ARTEM"))
 }
