@@ -138,6 +138,12 @@ line5`
 
 	fmt.Println("---------------------------------")
 
+	var str10 = "Hello, Ångström 世界"
+	fmt.Println(str10)
+	fmt.Println(Reverse(str10))
+
+	fmt.Println("---------------------------------")
+
 	// Проверка на равенство
 	fmt.Printf("str == str (strings are equal by value): %v\n", "abc" == "abc")
 	fmt.Printf("strVar == str (strings are equal by value): %v\n", str0 == "peace0")
@@ -365,4 +371,16 @@ func printCsvFile(filePath string, comma rune) {
 		}
 		fmt.Println(record)
 	}
+}
+
+func Reverse(str string) string {
+	result := make([]byte, len(str))
+	prevIndex, currentIndex := 0, len(str)
+	for charIndex := range str {
+		currentIndex -= charIndex - prevIndex
+		copy(result[currentIndex:], str[prevIndex:charIndex])
+		prevIndex = charIndex
+	}
+	copy(result[0:], str[prevIndex:])
+	return string(result)
 }
