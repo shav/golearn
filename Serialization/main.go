@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"gopkg.in/yaml.v3"
+	"strings"
+	"time"
 )
 
 type Contact struct {
@@ -12,11 +14,43 @@ type Contact struct {
 }
 
 type Person struct {
-	Name    string
-	Age     int
-	Grades  []int
-	Contact Contact
-	Manager *Person
+	Name     string
+	Age      int
+	IsYoung  bool
+	Grades   []int
+	Contact  Contact
+	Birthday DateTime
+	Manager  *Person
+}
+
+type DateTime struct {
+	time.Time
+}
+
+var defaultDateTime = time.Time{}
+
+const universalDateTimeFormat = "2006-01-02T15:04:05-07:00"
+
+func (datetime DateTime) MarshalJSON() ([]byte, error) {
+	if datetime.Time == defaultDateTime {
+		return []byte("\"\""), nil
+	}
+	stamp := fmt.Sprintf("\"%s\"", datetime.Format(universalDateTimeFormat))
+	return []byte(stamp), nil
+}
+
+func (datetime *DateTime) UnmarshalJSON(b []byte) (err error) {
+	s := strings.Trim(string(b), "\"")
+	if s == "null" {
+		datetime.Time = time.Time{}
+		return
+	}
+	datetime.Time, err = time.Parse(universalDateTimeFormat, s)
+	return
+}
+
+func (datetime DateTime) String() string {
+	return datetime.Format(universalDateTimeFormat)
 }
 
 func main() {
@@ -51,8 +85,9 @@ func main() {
 	var vovan = Person{Name: "Vovan", Age: 29}
 	var dimon = Person{Name: "Dimon", Age: 25}
 	var tom = Person{
-		Name: "Tom",
-		Age:  24,
+		Name:     "Tom",
+		Age:      24,
+		Birthday: DateTime{time.Date(1991, 1, 1, 9, 55, 0, 0, time.Local)},
 		Contact: Contact{
 			Email: "tom@gmail.com",
 			Phone: "+1234567899",
@@ -112,6 +147,7 @@ func main() {
 	fmt.Println("--------------------------------------")
 
 	// Десериализация структур
+	var tom2 Person
 	tomJson = []byte(`{
 	  "Name": "Tom",
 	  "Age": 20,
@@ -120,6 +156,7 @@ func main() {
 		"Email": "tom@gmail.com",
 		"Phone": "+7(965)123-456-78"
 	  },
+      "Birthday": "2000-01-06T23:10:00+04:00",
 	  "Manager": {
 		"Name": "Artem",
 		"Age": 10,
@@ -132,13 +169,14 @@ func main() {
 	  }
 	}
 	`)
-	json.Unmarshal(tomJson, &tom)
-	fmt.Println(tom)
-	fmt.Println(tom.Manager)
+	json.Unmarshal(tomJson, &tom2)
+	fmt.Println(tom2)
+	fmt.Println(tom2.Manager)
 
 	fmt.Println("--------------------------------------")
 
 	// Десериализация из yaml
+	var tom3 Person
 	tomYaml = []byte(`name: Tom
 age: 24
 grades:
@@ -157,7 +195,7 @@ manager:
         email: ""
         phone: ""
 `)
-	yaml.Unmarshal(tomYaml, &tom)
-	fmt.Println(tom)
-	fmt.Println(tom.Manager)
+	yaml.Unmarshal(tomYaml, &tom3)
+	fmt.Println(tom3)
+	fmt.Println(tom3.Manager)
 }
