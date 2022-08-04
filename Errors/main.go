@@ -3,6 +3,9 @@ package main
 import (
 	"errors"
 	"fmt"
+	goerrors "github.com/go-errors/errors"
+	"io"
+	"runtime"
 )
 
 type IndexOutOfRangeError struct {
@@ -60,7 +63,19 @@ func main() {
 		case ArgumentError:
 			fmt.Printf("%s: %v\n", error.message, error.value)
 		}
+
+		// Проверка ошибки (ошибка должна быть известной константой!)
+		errors.Is(err, io.EOF)
 	}
+
+	fmt.Println("---------------------------------")
+
+	tryCatched := TryCatch()
+	fmt.Println("try/catch: ", tryCatched)
+	fmt.Println()
+
+	tryCatched2 := TryCatchWithResult()
+	fmt.Println("try/catch with result: ", tryCatched2)
 
 	fmt.Println("---------------------------------")
 
@@ -90,6 +105,15 @@ func divide2(x, y float64) (float64, error) {
 func globalErrorHandler() {
 	if e := recover(); e != nil {
 		fmt.Println("Error: ", e)
+
+		// Получить стектрейс
+		var stackTrace = make([]byte, 1000 /* TODO: Пока непонятно, как заранее вычислить размер стектрейса */)
+		runtime.Stack(stackTrace, true)
+		fmt.Println(string(stackTrace))
+		// Вариант 2 (с использованием стороннего пакета)
+		fmt.Println(goerrors.Wrap(e, 2).ErrorStack())
+
+		//debug.PrintStack()
 	}
 }
 
@@ -101,4 +125,38 @@ func raiseError(code int) error {
 		return ArgumentError{message: "Wrong argument value", value: "777"}
 	}
 	return nil
+}
+
+func TryCatch() int {
+	defer func() {
+		// Имитация try/catch:
+		// После восстановления выполнение кода текущей функции ниже ошибки прерывается,
+		// но выполнение вызывающего внешнего кода продолжается!
+		if err := recover(); err != nil {
+			fmt.Println(err)
+			fmt.Println("Continue...")
+		}
+	}()
+	result := 1
+	panic("TryCatch: fail")
+	result = 2
+	return result
+}
+
+func TryCatchWithResult() (result int) {
+	defer func() {
+		// Имитация try/catch:
+		// После восстановления выполнение кода текущей функции ниже ошибки прерывается,
+		// но выполнение вызывающего внешнего кода продолжается!
+		if err := recover(); err != nil {
+			fmt.Println(err)
+			fmt.Println("Continue...")
+			// Данное значение вернётся наружу в вызывающий внешний код
+			result = 10
+		}
+	}()
+	result = 1
+	panic("TryCatchWithResult: fail")
+	result = 2
+	return result
 }
