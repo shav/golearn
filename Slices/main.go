@@ -96,6 +96,18 @@ func main() {
 
 	fmt.Println("--------------------------------------")
 
+	// Линейный поиск элементов среза
+	users = []string{"Tom", "Alice", "Kate"}
+	fmt.Printf("existing: %t, item index: %d\n", Contains(users, "Kate"), Find(users, "Kate"))
+	fmt.Printf("existing: %t, item index: %d\n", Contains(users, "Vovan"), Find(users, "Vovan"))
+
+	// Бинарный поиск места для вставки элемента в отсортированный массив
+	var sortedList = []int{1, 4, 6, 9, 10}
+	fmt.Printf("existing item inserting index: %d\n", sort.SearchInts(sortedList, 4))
+	fmt.Printf("non existing item inserting index: %d\n", sort.SearchInts(sortedList, 5))
+
+	fmt.Println("--------------------------------------")
+
 	// срезы - как окно в массив
 	planets := [...]string{
 		"Меркурий",
@@ -134,7 +146,7 @@ func main() {
 	fmt.Println(planets)
 	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 
-	iceGiants = giants[2:4:5 /*ёмкость*/]
+	iceGiants = giants[2:4:5 /*ёмкость*/ ]
 	fmt.Printf("\n%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 	iceGiants = append(iceGiants, "Плутон")
 	iceGiants[1] = "Neptun"
@@ -205,4 +217,22 @@ func Equal(a, b []string) bool {
 		}
 	}
 	return true
+}
+
+func Find(slice []string, searchValue string) int {
+	for index, item := range slice {
+		if searchValue == item {
+			return index
+		}
+	}
+	return -1
+}
+
+func Contains(slice []string, searchValue string) bool {
+	for _, item := range slice {
+		if searchValue == item {
+			return true
+		}
+	}
+	return false
 }
