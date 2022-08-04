@@ -5,6 +5,9 @@ import (
 	"types/temperature"
 )
 
+// Это всего лишь alias, новый тип не создаётся
+type Guid = string
+
 func main() {
 	// Целочисленные типы
 	var num0 byte = 1
@@ -126,4 +129,12 @@ func main() {
 
 	// var sum = f + c // Типы температур не совпадают
 	// f = temperature.Farenheite(c) // допустимо с точки зрения go, но некорректно с логической точки зрения
+
+	fmt.Println("------------------------------------------------")
+
+	// Для type alias-ов конвертация типов не требуется!
+	var guid Guid = "043d3408-cf0b-460e-a920-52433f98ae19"
+	var str string = guid
+	fmt.Println(guid)
+	fmt.Println(str)
 }
