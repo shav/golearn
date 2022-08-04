@@ -20,7 +20,10 @@ func main() {
 	//fmt.Println(users[5]) // error: index out of range (len <= index <= capacity)
 	//fmt.Println(users[10]) // error: index out of range (index > capacity)
 
+	fmt.Println("Slice after delete item:")
 	users = delete(users, 0)
+	fmt.Printf("%v, len = %d, capacity = %d\n", users, len(users), cap(users))
+	deleteInPlace(&users, 0)
 	fmt.Printf("%v, len = %d, capacity = %d\n", users, len(users), cap(users))
 
 	fmt.Println("--------------------------------------")
@@ -131,7 +134,7 @@ func main() {
 	fmt.Println(planets)
 	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 
-	iceGiants = giants[2:4:5 /*ёмкость*/ ]
+	iceGiants = giants[2:4:5 /*ёмкость*/]
 	fmt.Printf("\n%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 	iceGiants = append(iceGiants, "Плутон")
 	iceGiants[1] = "Neptun"
@@ -172,6 +175,12 @@ func main() {
 
 func delete(slice []string, index uint) []string {
 	return append(slice[:index], slice[index+1:]...)
+}
+
+func deleteInPlace(slice *[]string, index uint) {
+	copy((*slice)[index:], (*slice)[index+1:]) // Shift slice[i+1:] left one index.
+	(*slice)[len(*slice)-1] = ""               // Erase last element (write zero value).
+	*slice = (*slice)[:len(*slice)-1]          // Truncate slice.
 }
 
 func join(numbers ...int) string {
