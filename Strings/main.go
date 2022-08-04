@@ -228,6 +228,12 @@ line5`
 	}
 	fmt.Println(sb.String())
 
+	// Вариант 5
+	str3 := "Hello"
+	str4 := " world!"
+	concatStr = string(append([]byte(str3), str4...))
+	fmt.Println(concatStr)
+
 	fmt.Println("--------------------------------------")
 
 	// Замена подстрок
