@@ -14,13 +14,14 @@ type Contact struct {
 }
 
 type Person struct {
-	Name     string
-	Age      int
-	IsYoung  bool
-	Grades   []int
-	Contact  Contact
-	Birthday DateTime
-	Manager  *Person
+	Name       string
+	Age        int
+	ChildCount uint `json:",omitempty"`
+	IsYoung    bool
+	Grades     []int
+	Contact    Contact
+	Birthday   DateTime `json:"birthdate"`
+	Manager    *Person  `json:"mgr"`
 }
 
 type DateTime struct {
@@ -83,7 +84,7 @@ func main() {
 	// Сериализация структур
 	var artem = Person{Name: "Artem", Age: 31}
 	var vovan = Person{Name: "Vovan", Age: 29}
-	var dimon = Person{Name: "Dimon", Age: 25}
+	var dimon = Person{Name: "Dimon", Age: 25, ChildCount: 2}
 	var tom = Person{
 		Name:     "Tom",
 		Age:      24,
@@ -156,8 +157,8 @@ func main() {
 		"Email": "tom@gmail.com",
 		"Phone": "+7(965)123-456-78"
 	  },
-      "Birthday": "2000-01-06T23:10:00+04:00",
-	  "Manager": {
+      "birthdate": "2000-01-06T23:10:00+04:00",
+	  "mgr": {
 		"Name": "Artem",
 		"Age": 10,
 		"Grades": null,
@@ -165,7 +166,7 @@ func main() {
 		  "Email": "",
 		  "Phone": ""
 		},
-		"Manager": null
+		"mgr": null
 	  }
 	}
 	`)
