@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -134,6 +135,57 @@ func main() {
 		fmt.Println(err)
 	} else {
 		io.Copy(os.Stdout, rFile)
+	}
+
+	fmt.Println("\n--------------------------------------")
+
+	// Форматированная запись в файл
+	wFile, err = os.OpenFile("format.txt", os.O_WRONLY|os.O_CREATE, 0777)
+	defer wFile.Close()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Fprintf(wFile, "%0.2f\n", 3.14)
+
+		var person1 = Person{Name: "Tom", Age: 30}
+		fmt.Fprintf(wFile, "%s %d\n", person1.Name, person1.Age)
+
+		var person2 = Person{Name: "Artem", Age: 20}
+		fmt.Fprintf(wFile, "%+v\n", person2)
+
+		fmt.Fprintln(wFile, "Hello, World!")
+	}
+
+	fmt.Println("\n--------------------------------------")
+
+	// Форматированное чтение из файла
+	rFile, err = os.Open("format.txt")
+	defer rFile.Close()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		var num float64
+		_, err = fmt.Fscanf(rFile, "%g", &num)
+		fmt.Println(num)
+
+		var person1 = Person{}
+		fmt.Fscanf(rFile, "%s %d\n", &person1.Name, &person1.Age)
+		fmt.Printf("%+v\n", person1)
+
+		// TODO: Десериализация объектов так не взлетает пока
+		//var person2 = Person{}
+		//fmt.Fscanf(rFile, "%+v\n", &person2)
+		//fmt.Printf("%+v", person2)
+
+		var str string
+		scanner := bufio.NewScanner(rFile)
+		for scanner.Scan() {
+			str = scanner.Text()
+			fmt.Println(str)
+			if err := scanner.Err(); err != nil {
+				fmt.Println(err)
+			}
+		}
 	}
 }
 

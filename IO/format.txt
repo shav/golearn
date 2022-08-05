@@ -1,0 +1,4 @@
+3.14
+Tom 30
+{Name:Artem Age:20}
+Hello, World!
