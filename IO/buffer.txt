@@ -1,0 +1,3 @@
+Hi, people!
+2.71
+{"Name":"Artem","Age":30}}

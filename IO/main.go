@@ -177,24 +177,68 @@ func main() {
 		//fmt.Fscanf(rFile, "%+v\n", &person2)
 		//fmt.Printf("%+v", person2)
 
+		// Так хрень какая-то получается - Fscanln считывает через пробелы, а не через перевод каретки
 		var str string
-		scanner := bufio.NewScanner(rFile)
-		for scanner.Scan() {
-			str = scanner.Text()
-			fmt.Println(str)
-			if err := scanner.Err(); err != nil {
+		for {
+			_, err := fmt.Fscanln(rFile, &str)
+			fmt.Print(str)
+			if err != nil {
 				fmt.Println(err)
+				break
 			}
 		}
 	}
 
 	fmt.Println("\n--------------------------------------")
 
+	// Буферизованная запись в файл
+	wFile, err = os.OpenFile("buffer.txt", os.O_WRONLY|os.O_CREATE, 0777)
+	defer wFile.Close()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		writer := bufio.NewWriter(wFile)
+		writer.WriteString("Hi, people!")
+		writer.WriteString("\n")
+
+		writer.WriteString(fmt.Sprintf("%0.2f", 2.71))
+		writer.WriteString("\n")
+
+		var person = Person{Name: "Artem", Age: 30}
+		pJson, _ := json.Marshal(person)
+		writer.Write(pJson)
+
+		writer.Flush()
+	}
+
+	fmt.Println("\n--------------------------------------")
+
+	// Буферизованное чтение из файла
+	rFile, err = os.Open("buffer.txt")
+	defer rFile.Close()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		reader := bufio.NewReader(rFile)
+		for {
+			line, _, err := reader.ReadLine()
+			if err != nil {
+				fmt.Println(err)
+				break
+			}
+			fmt.Println(string(line))
+		}
+	}
+
+	fmt.Println("\n--------------------------------------")
+
+	// Ввод с консоли
 	var name string
 	var age int
 	fmt.Print("Введите имя и возраст: ")
 	fmt.Scan(&name, &age)
 	fmt.Println(name, age)
+
 }
 
 func FileExists(filePath string) (bool, error) {
