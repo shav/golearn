@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -251,6 +252,14 @@ func main() {
 		fmt.Fscanf(sr, "%f", &num)
 		fmt.Println(num)
 	}
+
+	fmt.Println("\n--------------------------------------")
+
+	// Буфер байтов
+	var buf bytes.Buffer
+	fmt.Fprintf(&buf, "Size: %d MB.", 85)
+	str := buf.String()
+	fmt.Println(str)
 
 	fmt.Println("\n--------------------------------------")
 
