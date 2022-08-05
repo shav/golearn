@@ -121,6 +121,20 @@ func main() {
 			fmt.Print(string(data[:n]))
 		}
 	}
+
+	fmt.Println("\n--------------------------------------")
+
+	// Копирование потоков
+	io.Copy(os.Stdout, phone1)
+	fmt.Println()
+
+	rFile, err = os.Open("hello.txt")
+	defer rFile.Close()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		io.Copy(os.Stdout, rFile)
+	}
 }
 
 func FileExists(filePath string) (bool, error) {
