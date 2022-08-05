@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 )
 
 type PhoneReader string
@@ -228,6 +229,27 @@ func main() {
 			}
 			fmt.Println(string(line))
 		}
+	}
+
+	fmt.Println("\n--------------------------------------")
+
+	// Буферизованно-форматированное чтение из файла
+	rFile, err = os.Open("buffer.txt")
+	defer rFile.Close()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		reader := bufio.NewReader(rFile)
+		// TODO: Обработка ошибок
+		line /* строка */, _, _ := reader.ReadLine()
+		strings.NewReader(string(line))
+		fmt.Println(string(line))
+
+		line /* число */, _, _ = reader.ReadLine()
+		sr := strings.NewReader(string(line))
+		var num float64
+		fmt.Fscanf(sr, "%f", &num)
+		fmt.Println(num)
 	}
 
 	fmt.Println("\n--------------------------------------")
