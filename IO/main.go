@@ -187,6 +187,14 @@ func main() {
 			}
 		}
 	}
+
+	fmt.Println("\n--------------------------------------")
+
+	var name string
+	var age int
+	fmt.Print("Введите имя и возраст: ")
+	fmt.Scan(&name, &age)
+	fmt.Println(name, age)
 }
 
 func FileExists(filePath string) (bool, error) {
