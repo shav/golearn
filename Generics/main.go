@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"math"
+)
 
 type Number interface {
 	int | int8 | int16 | int32 | int64 | uint | uint8 | uint16 | uint32 | uint64 | float32 | float64
@@ -12,6 +15,13 @@ func Sum[T Number](numbers ...T) T {
 		result = result + num
 	}
 	return result
+}
+
+func Abs[T Number](x T) T {
+	if x < 0 {
+		return -x
+	}
+	return x
 }
 
 func MapKeys[K comparable, V any](m map[K]V) []K {
@@ -60,6 +70,9 @@ func main() {
 
 	var s2 = Sum[float64](1, 2, 3)
 	fmt.Println(s2)
+
+	fmt.Println(Abs(-100))
+	fmt.Println(Abs(math.Inf(-1)))
 
 	// var s3 = Sum("a", "b", "c") // error: тип string не подходит под ограничение generic-типа
 
