@@ -80,6 +80,58 @@ func (plane Plane) Move() {
 	fmt.Printf("%s fly\n", plane.Model)
 }
 
+// -------------------------------------------------------------
+
+type IConflict1 interface {
+	Read()
+}
+
+type IConflict2 interface {
+	Read(name string)
+	Write(name string)
+}
+
+type ConflictImpl struct {
+	name string
+}
+
+func (c *ConflictImpl) Read() {
+}
+
+// Перегрузка методов не поддерживается!
+//func (c *ConflictImpl) Read(name string) {
+//}
+
+func (c *ConflictImpl) Write(name string) {
+}
+
+// -------------------------------------------------------------
+
+type ConflictBase1 struct {
+}
+
+func (c *ConflictBase1) Print() {
+	fmt.Println("ConflictBase1")
+}
+
+type ConflictBase2 struct {
+}
+
+func (c *ConflictBase2) Print() {
+	fmt.Println("ConflictBase2")
+}
+
+type Conflict struct {
+	ConflictBase1
+	ConflictBase2
+}
+
+func (c *Conflict) Print() {
+	c.ConflictBase1.Print()
+	c.ConflictBase2.Print()
+	fmt.Println("Conflict")
+}
+
 func main() {
 	var cat = Cat{Animal{Name: "Murka"}}
 	var dog = Dog{Animal{Name: "Rex"}}
@@ -152,4 +204,20 @@ func main() {
 	animals := []IAnimal{cat, dog}
 	// movers = animals // error: из коробки ковариантность не работает
 	fmt.Println(animals)
+
+	fmt.Println("--------------------------------------")
+
+	// Конфликты при имплементации интерфейсов
+	var con1 IConflict1 = &ConflictImpl{name: "Qwerty"}
+	fmt.Println(con1)
+
+	// Не получается реализовать метод из IConflict2,
+	// т.к. метод с таким же именем существует в IConflict1, а перегрузка методов не поддерживается
+	//var con2 IConflict2 = &ConflictImpl{name: "Qwerty"}
+
+	fmt.Println("--------------------------------------")
+
+	// Конфликты при "наследовании"-композиции
+	var con Conflict = Conflict{}
+	con.Print()
 }
