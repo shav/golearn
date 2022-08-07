@@ -10,6 +10,16 @@ type IStack[T comparable] interface {
 	Clear()
 }
 
+type IQueue[T comparable] interface {
+	Enqueue(value T)
+	Dequeue() (T, error)
+	Peek() (T, error)
+	Length() int
+	IsEmpty() bool
+	Contains(value T) bool
+	Clear()
+}
+
 type IList[T comparable] interface {
 	Add(values ...T)
 	Remove(value T)

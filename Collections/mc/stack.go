@@ -25,15 +25,14 @@ func (stack *Stack[T]) Push(value T) {
 }
 
 func (stack *Stack[T]) Pop() (T, error) {
-	var defaultT T
 	var length = len(stack.items)
 	if length == 0 {
-		return defaultT, errors.New("Stack is empty")
+		return defaultOf[T](), errors.New("Stack is empty")
 	}
 
 	var topIndex = length - 1
 	var top = stack.items[topIndex]
-	stack.items[topIndex] = defaultT
+	stack.items[topIndex] = defaultOf[T]()
 	stack.items = stack.items[:topIndex]
 	return top, nil
 }
@@ -41,8 +40,7 @@ func (stack *Stack[T]) Pop() (T, error) {
 func (stack *Stack[T]) Peek() (T, error) {
 	var length = len(stack.items)
 	if length == 0 {
-		var defaultT T
-		return defaultT, errors.New("Stack is empty")
+		return defaultOf[T](), errors.New("Stack is empty")
 	}
 
 	return stack.items[len(stack.items)-1], nil

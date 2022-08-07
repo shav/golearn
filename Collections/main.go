@@ -112,4 +112,43 @@ func main() {
 
 	list.Clear()
 	fmt.Println(list)
+
+	fmt.Println("--------------------------------------")
+
+	// Очередь
+	var queue mc.IQueue[int] = mc.NewEmptyQueue[int]()
+	queue.Enqueue(1)
+	queue.Enqueue(2)
+	queue.Enqueue(3)
+	fmt.Println(queue)
+
+	queueFirst, err := queue.Peek()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("queue first: %d\n", queueFirst)
+	}
+
+	queueFirst, err = queue.Dequeue()
+	queueFirst, err = queue.Dequeue()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("queue first: %d\n", queueFirst)
+	}
+
+	searchValue = 2
+	fmt.Printf("queue contains %d: %v\n", searchValue, queue.Contains(searchValue))
+	searchValue = 3
+	fmt.Printf("queue contains %d: %v\n", searchValue, queue.Contains(searchValue))
+
+	queue.Clear()
+	fmt.Println(queue)
+
+	queueFirst, err = queue.Dequeue()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("queue first: %d\n", queueFirst)
+	}
 }

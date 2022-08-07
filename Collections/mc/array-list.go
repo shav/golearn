@@ -63,14 +63,3 @@ func (list *ArrayList[T]) Clear() {
 func (list *ArrayList[T]) String() string {
 	return fmt.Sprintf("%v", list.items)
 }
-
-func deleteInPlace[T any](slice *[]T, index uint) {
-	copy((*slice)[index:], (*slice)[index+1:]) // Shift slice[i+1:] left one index.
-	(*slice)[len(*slice)-1] = defaultOf[T]()   // Erase last element (write zero value).
-	*slice = (*slice)[:len(*slice)-1]          // Truncate slice.
-}
-
-func defaultOf[T any]() T {
-	var defaultT T
-	return defaultT
-}
