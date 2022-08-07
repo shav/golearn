@@ -28,7 +28,7 @@ func main() {
 
 	fmt.Println("--------------------------------------")
 
-	set := mc.NewSet()
+	set := mc.NewSet[int]()
 	set.Add(1, 2, 3)
 	set.Add(1, 2)
 	fmt.Println(set)
