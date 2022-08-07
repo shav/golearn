@@ -118,14 +118,25 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		data := make([]byte, 64)
+		data := make([]byte, 4)
+		rFile.Seek(4, 0) // сдвигаем позицию для чтения
 		for {
-			n, err := rFile.Read(data)
+			n, err := io.ReadAtLeast(rFile, data, 2)
+			//n, err := rFile.Read(data)
 			if err == io.EOF { // если конец файла
 				break
 			}
 			fmt.Print(string(data[:n]))
 		}
+	}
+	fmt.Println()
+
+	// Чтение файла целиком
+	dat, err := os.ReadFile("hello.txt")
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Print(string(dat))
 	}
 
 	fmt.Println("\n--------------------------------------")
