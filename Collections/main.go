@@ -18,6 +18,7 @@ var Flags = FlagsType{
 }
 
 func main() {
+	// Набор битов
 	bits := mc.BitSet(0)
 	bits.Set(Flags.F2 | Flags.F1)
 	fmt.Printf("%b\n", bits)
@@ -43,7 +44,8 @@ func main() {
 
 	fmt.Println("--------------------------------------")
 
-	stack := mc.NewStack[int]()
+	// Стек
+	stack := mc.NewEmptyStack[int]()
 	stack.Push(1)
 	stack.Push(2)
 	stack.Push(3)
@@ -69,7 +71,9 @@ func main() {
 	searchValue = 1
 	fmt.Printf("stack contains %d: %v\n", searchValue, stack.Contains(searchValue))
 
-	stackTop, err = stack.Pop()
+	stack.Clear()
+	fmt.Println(stack)
+
 	stackTop, err = stack.Pop()
 	if err != nil {
 		fmt.Println(err)
@@ -78,4 +82,34 @@ func main() {
 	}
 
 	fmt.Println("--------------------------------------")
+
+	// Список (на основе массивов)
+	list := mc.NewEmptyArrayList[int]()
+	list.Add(10, 20, 30, 20, 40)
+	fmt.Println(list)
+	fmt.Printf("list length: %d\n", list.Length())
+
+	list.Remove(20)
+	fmt.Println(list)
+
+	listItem, err := list.GetByIndex(1)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("list[1]: %d\n", listItem)
+	}
+	listItem, err = list.GetByIndex(1000)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("list item: %d\n", listItem)
+	}
+
+	searchValue = 10
+	fmt.Printf("list contains %d: %v\n", searchValue, list.Contains(searchValue))
+	searchValue = 20
+	fmt.Printf("list contains %d: %v\n", searchValue, list.Contains(searchValue))
+
+	list.Clear()
+	fmt.Println(list)
 }

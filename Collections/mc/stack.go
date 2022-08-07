@@ -16,7 +16,7 @@ func NewStack[T comparable](capacity uint) *Stack[T] {
 }
 
 func NewEmptyStack[T comparable]() *Stack[T] {
-	stack := &Stack[T]{items: make([]T, 0)}
+	stack := &Stack[T]{items: make([]T, 0, defaultCapacity)}
 	return stack
 }
 
@@ -65,6 +65,11 @@ func (stack *Stack[T]) Contains(value T) bool {
 	return false
 }
 
+func (stack *Stack[T]) Clear() {
+	stack.items = nil
+	stack.items = make([]T, 0, defaultCapacity)
+}
+
 func (stack *Stack[T]) String() string {
 	// TOOD: Optimize string concatenation
 	numStr := make([]string, len(stack.items))
@@ -72,5 +77,5 @@ func (stack *Stack[T]) String() string {
 	for i := length - 1; i >= 0; i-- {
 		numStr[length-i-1] = fmt.Sprintf("%d", stack.items[i])
 	}
-	return fmt.Sprintf("{%s}", strings.Join(numStr, ", "))
+	return fmt.Sprintf("[%s]", strings.Join(numStr, ", "))
 }
