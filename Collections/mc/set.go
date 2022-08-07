@@ -10,7 +10,7 @@ type Set[T comparable] struct {
 }
 
 func NewSet[T comparable](values ...T) *Set[T] {
-	set := &Set[T]{items: make(map[T]bool)}
+	set := &Set[T]{items: make(map[T]bool, len(values))}
 	set.Add(values...)
 	return set
 }
@@ -33,6 +33,7 @@ func (set *Set[T]) Remove(values ...T) {
 }
 
 func (set *Set[T]) String() string {
+	// TOOD: Optimize string concatenation
 	numStr := make([]string, len(set.items))
 	i := 0
 	for item, _ := range set.items {
