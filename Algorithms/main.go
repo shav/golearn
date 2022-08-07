@@ -10,6 +10,8 @@ func main() {
 	fmt.Println(getPrimeNumbers(100))
 
 	fmt.Println("--------------------------------------")
+
+	fmt.Println(BytesToString(123456))
 }
 
 func getPrimeNumbers(max int) []uint {
@@ -28,4 +30,23 @@ func getPrimeNumbers(max int) []uint {
 	}
 
 	return result
+}
+
+func BytesToString(bytes int64) string {
+	const unit = 1000
+	if bytes < unit {
+		return fmt.Sprintf("%d B", bytes)
+	}
+
+	//div, exp := int64(unit), 0
+	//for n := bytes / unit; n >= unit; n /= unit {
+	//	div *= unit
+	//	exp++
+	//}
+
+	var exp uint = uint(math.Log10(float64(bytes)) / math.Log10(unit))
+	var div float64 = math.Pow(unit, float64(exp))
+
+	return fmt.Sprintf("%.1f %cB",
+		float64(bytes)/float64(div), "kMGTPE"[exp-1])
 }
