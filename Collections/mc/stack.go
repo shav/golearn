@@ -10,8 +10,13 @@ type Stack[T comparable] struct {
 	items []T
 }
 
-func NewStack[T comparable]() *Stack[T] {
-	stack := &Stack[T]{items: make([]T, 0, 5)}
+func NewStack[T comparable](capacity uint) *Stack[T] {
+	stack := &Stack[T]{items: make([]T, 0, capacity)}
+	return stack
+}
+
+func NewEmptyStack[T comparable]() *Stack[T] {
+	stack := &Stack[T]{items: make([]T, 0)}
 	return stack
 }
 
