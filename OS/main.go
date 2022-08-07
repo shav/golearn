@@ -5,6 +5,7 @@ import (
 	"io"
 	"os"
 	"os/exec"
+	"os/signal"
 	"path/filepath"
 	"strings"
 	"syscall"
@@ -73,9 +74,27 @@ func main() {
 	if len(os.Args) != 3 {
 		var programName = filepath.Base(os.Args[0])
 		fmt.Println("Usage:", programName, "PATTERN", "FILE")
-		return
+	} else {
+		pattern := os.Args[1]
+		file := os.Args[2]
+		fmt.Printf("%s: %s\n", file, pattern)
 	}
-	pattern := os.Args[1]
-	file := os.Args[2]
-	fmt.Printf("%s: %s\n", file, pattern)
+
+	fmt.Println("--------------------------------------")
+
+	// Получение сигналов от ОС
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+	done := make(chan bool, 1)
+
+	go func() {
+		sig := <-sigs
+		fmt.Println()
+		fmt.Println(sig)
+		done <- true
+	}()
+
+	fmt.Println("awaiting signal")
+	<-done
+	fmt.Println("exiting")
 }
