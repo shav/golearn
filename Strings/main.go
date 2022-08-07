@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/csv"
 	"fmt"
 	"html"
@@ -341,6 +342,16 @@ line5`
 	r := regexp.MustCompile("\\s+")
 	replace := r.ReplaceAllString(stringWithSpaces, " ")
 	fmt.Println(replace)
+
+	fmt.Println("--------------------------------------")
+
+	// base64
+	data := "abc123!?$*&()'-=@~"
+	b64Str := base64.StdEncoding.EncodeToString([]byte(data))
+	fmt.Println(b64Str)
+
+	decodedData, _ := base64.StdEncoding.DecodeString(b64Str)
+	fmt.Println(string(decodedData))
 }
 
 func toCamelCase(input string) string {
