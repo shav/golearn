@@ -2,24 +2,15 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"os"
+	"os/exec"
 	"path/filepath"
 	"strings"
+	"syscall"
 )
 
 func main() {
-	// Получение аргументов командной строки
-	if len(os.Args) != 3 {
-		var programName = filepath.Base(os.Args[0])
-		fmt.Println("Usage:", programName, "PATTERN", "FILE")
-		return
-	}
-	pattern := os.Args[1]
-	file := os.Args[2]
-	fmt.Printf("%s: %s\n", file, pattern)
-
-	fmt.Println("--------------------------------------")
-
 	// Список переменных окружения
 	for _, s := range os.Environ() {
 		kv := strings.SplitN(s, "=", 2) // unpacks "key=value"
@@ -34,4 +25,57 @@ func main() {
 	fmt.Printf("%q\n", os.Getenv("ARTEM"))
 	os.Unsetenv("ARTEM")
 	fmt.Printf("%q\n", os.Getenv("ARTEM"))
+
+	fmt.Println("--------------------------------------")
+
+	// Запуск стороннего процесса
+	binary, lookErr := exec.LookPath("curl")
+	if lookErr != nil {
+		fmt.Println(lookErr)
+	} else {
+		args := []string{"http://yandex.ru"}
+		env := os.Environ()
+		execErr := syscall.Exec(binary, args, env)
+		if execErr != nil {
+			fmt.Println(execErr)
+		}
+	}
+
+	// Запуск дочернего процесса
+	output, err := exec.Command("curl", "http://yandex.ru").Output()
+	if err != nil {
+		switch e := err.(type) {
+		case *exec.Error:
+			fmt.Println("failed executing:", err)
+		case *exec.ExitError:
+			fmt.Println("command exit code: ", e.ExitCode())
+		default:
+			fmt.Println(err)
+		}
+	} else {
+		fmt.Println(output)
+	}
+
+	// Общение с дочерним процессом
+	grepCmd := exec.Command("grep", "hello")
+	grepIn, _ := grepCmd.StdinPipe()
+	grepOut, _ := grepCmd.StdoutPipe()
+	grepCmd.Start()
+	grepIn.Write([]byte("hello grep\ngoodbye grep"))
+	grepIn.Close()
+	grepBytes, _ := io.ReadAll(grepOut)
+	grepCmd.Wait()
+	fmt.Println(string(grepBytes))
+
+	fmt.Println("--------------------------------------")
+
+	// Получение аргументов командной строки
+	if len(os.Args) != 3 {
+		var programName = filepath.Base(os.Args[0])
+		fmt.Println("Usage:", programName, "PATTERN", "FILE")
+		return
+	}
+	pattern := os.Args[1]
+	file := os.Args[2]
+	fmt.Printf("%s: %s\n", file, pattern)
 }
