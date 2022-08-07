@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"strings"
 )
 
 func main() {
@@ -112,61 +111,8 @@ func main() {
 		tempGroups[g] = append(tempGroups[g], t)
 	}
 	fmt.Println(tempGroups)
-
-	fmt.Println("---------------------------------")
-
-	// Имплементация множеств на основе словаря
-	set := NewSet()
-	set.add(1, 2, 3)
-	set.add(1, 2)
-	fmt.Println(set)
-
-	set.remove(1)
-	fmt.Println(set)
-
-	searchValue := 2
-	fmt.Printf("set contains %d: %v\n", searchValue, set.contains(searchValue))
-	searchValue = 1
-	fmt.Printf("set contains %d: %v\n", searchValue, set.contains(searchValue))
 }
 
 func setValue(dict map[string]int, key string, value int) {
 	dict[key] = value
-}
-
-type Set struct {
-	items map[int]bool
-}
-
-func NewSet(values ...int) *Set {
-	set := &Set{items: make(map[int]bool)}
-	set.add(values...)
-	return set
-}
-
-func (set *Set) contains(value int) bool {
-	exists, ok := set.items[value]
-	return ok && exists
-}
-
-func (set *Set) add(values ...int) {
-	for _, value := range values {
-		set.items[value] = true
-	}
-}
-
-func (set *Set) remove(values ...int) {
-	for _, value := range values {
-		delete(set.items, value)
-	}
-}
-
-func (set *Set) String() string {
-	numStr := make([]string, len(set.items))
-	i := 0
-	for item, _ := range set.items {
-		numStr[i] = fmt.Sprintf("%d", item)
-		i++
-	}
-	return fmt.Sprintf("{%s}", strings.Join(numStr, ", "))
 }

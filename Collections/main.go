@@ -27,4 +27,19 @@ func main() {
 	fmt.Printf("%b\n", bits)
 
 	fmt.Println("--------------------------------------")
+
+	set := mc.NewSet()
+	set.Add(1, 2, 3)
+	set.Add(1, 2)
+	fmt.Println(set)
+
+	set.Remove(1)
+	fmt.Println(set)
+
+	searchValue := 2
+	fmt.Printf("set contains %d: %v\n", searchValue, set.Contains(searchValue))
+	searchValue = 1
+	fmt.Printf("set contains %d: %v\n", searchValue, set.Contains(searchValue))
+
+	fmt.Println("--------------------------------------")
 }
