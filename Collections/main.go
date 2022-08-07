@@ -45,7 +45,7 @@ func main() {
 	fmt.Println("--------------------------------------")
 
 	// Стек
-	stack := mc.NewEmptyStack[int]()
+	var stack mc.IStack[int] = mc.NewEmptyStack[int]()
 	stack.Push(1)
 	stack.Push(2)
 	stack.Push(3)
@@ -84,7 +84,7 @@ func main() {
 	fmt.Println("--------------------------------------")
 
 	// Список (на основе массивов)
-	list := mc.NewEmptyArrayList[int]()
+	var list mc.IList[int] = mc.NewEmptyArrayList[int]()
 	list.Add(10, 20, 30, 20, 40)
 	fmt.Println(list)
 	fmt.Printf("list length: %d\n", list.Length())
