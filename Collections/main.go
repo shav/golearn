@@ -1,14 +1,14 @@
 package main
 
 import (
-	"artem/collections/mycollections"
+	"artem/collections/mc"
 	"fmt"
 )
 
 type FlagsType struct {
-	F0 mycollections.Flag
-	F1 mycollections.Flag
-	F2 mycollections.Flag
+	F0 mc.Flag
+	F1 mc.Flag
+	F2 mc.Flag
 }
 
 var Flags = FlagsType{
@@ -18,7 +18,7 @@ var Flags = FlagsType{
 }
 
 func main() {
-	bits := mycollections.BitSet(0)
+	bits := mc.BitSet(0)
 	bits.Set(Flags.F2 | Flags.F1)
 	fmt.Printf("%b\n", bits)
 	bits.Toggle(Flags.F1)

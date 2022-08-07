@@ -1,4 +1,4 @@
-package mycollections
+package mc // = my collections
 
 type BitSet uint8
 type Flag uint8
