@@ -89,12 +89,18 @@ func main() {
 
 	go func() {
 		sig := <-sigs
-		fmt.Println()
 		fmt.Println(sig)
 		done <- true
 	}()
 
 	fmt.Println("awaiting signal")
 	<-done
-	fmt.Println("exiting")
+
+	fmt.Println("--------------------------------------")
+
+	// Принудительный выход из приложения
+	defer fmt.Println("!!!!!!!!!!!!!")
+	fmt.Println("exiting...")
+	os.Exit(3) // <-- deferred код не выполняется!
+	fmt.Println("exited!")
 }
