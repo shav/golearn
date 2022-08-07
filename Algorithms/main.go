@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/yourbasic/bit"
 	"math"
+	"math/big"
 )
 
 func main() {
@@ -12,6 +13,16 @@ func main() {
 	fmt.Println("--------------------------------------")
 
 	fmt.Println(BytesToString(123456))
+	fmt.Println(BytesToString(1e9))
+
+	fmt.Println("--------------------------------------")
+
+	var num, _ = new(big.Int).SetString("170141183460469231731687303715884105727", 10)
+	fmt.Printf("%v is prime: %t", num, IsPrime(*num))
+}
+
+func IsPrime(num big.Int) bool {
+	return num.ProbablyPrime(20)
 }
 
 func getPrimeNumbers(max int) []uint {
