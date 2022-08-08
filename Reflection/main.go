@@ -121,6 +121,31 @@ func main() {
 	mapValue.SetMapIndex(rk, rv)
 	myMap = ValueOf[map[string]int](mapValue)
 	fmt.Println(myMap)
+
+	fmt.Println("--------------------------------------")
+
+	// Динамическое создание структур
+	props := map[string]any{
+		"Prop1": 1,
+		"Prop2": "str",
+		"Prop3": []int{10, 20, 30},
+	}
+	var structProps []reflect.StructField
+	for propName, value := range props {
+		propType := reflect.TypeOf(value)
+		sf := reflect.StructField{
+			Name: propName,
+			Type: propType,
+		}
+		structProps = append(structProps, sf)
+	}
+	structType := reflect.StructOf(structProps)
+	structObject := reflect.New(structType)
+	for propName, value := range props {
+		property := structObject.Elem().FieldByName(propName)
+		property.Set(reflect.ValueOf(value))
+	}
+	fmt.Printf("%+v\n", structObject)
 }
 
 func TypeOf[T any]() reflect.Type {
