@@ -68,7 +68,19 @@ func main() {
 
 	// Получение значения полей структуры
 	personVal := reflect.ValueOf(&person)
-	property := personVal.Elem().Field(0)
-	fmt.Println(property.Interface())
+	strProperty := personVal.Elem().Field(0)
+	fmt.Println(strProperty.Interface())
 
+	fmt.Println("--------------------------------------")
+
+	// Означивание переменных
+	// strVal.SetString("World") // error: Просто переменные (не указатели) изменять через reflection нельзя
+	pStrVal.Elem().SetString("World")
+	fmt.Println(str)
+
+	// Означивание полей структуры
+	strProperty.SetString("Tom")
+	fmt.Println(person)
+
+	fmt.Println("--------------------------------------")
 }
