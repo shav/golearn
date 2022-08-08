@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"golang.org/x/text/feature/plural"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
@@ -27,20 +28,12 @@ func main() {
 		),
 	)
 
-	prt := message.NewPrinter(language.English)
-	prt.Printf(ITEMS_MESSAGE, 0)
-	prt.Println()
-	prt.Printf(ITEMS_MESSAGE, 1)
-	prt.Println()
-	prt.Printf(ITEMS_MESSAGE, 10)
-	prt.Println()
-	prt.Printf(ITEMS_MESSAGE, 1000)
-	prt.Println()
-
-	prt.Printf(AVERAGE_MESSAGE, 0.8)
-	prt.Println()
-	prt.Printf(AVERAGE_MESSAGE, 1.0)
-	prt.Println()
-	prt.Printf(AVERAGE_MESSAGE, 10.23)
-	prt.Println()
+	m := message.NewPrinter(language.English)
+	fmt.Println(m.Sprintf(ITEMS_MESSAGE, 0))
+	fmt.Println(m.Sprintf(ITEMS_MESSAGE, 1))
+	fmt.Println(m.Sprintf(ITEMS_MESSAGE, 10))
+	fmt.Println(m.Sprintf(ITEMS_MESSAGE, 1000))
+	fmt.Println(m.Sprintf(AVERAGE_MESSAGE, 0.8))
+	fmt.Println(m.Sprintf(AVERAGE_MESSAGE, 1.0))
+	fmt.Println(m.Sprintf(AVERAGE_MESSAGE, 10.23))
 }
