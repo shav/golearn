@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	html "html/template"
 	"os"
 	"text/template"
 )
@@ -75,6 +76,13 @@ func main() {
 		"NameAge is {{concat .Name .Age}}\n",
 		template.FuncMap{"concat": concat})
 	t5.Execute(os.Stdout, person)
+
+	fmt.Println("----------------------------------")
+
+	// Html-шаблоны
+	t6, _ := html.New("t6").Parse("Hello, {{.}}!")
+	htmlInject := "<script>alert('pawned!')</script>"
+	t6.Execute(os.Stdout, htmlInject)
 }
 
 func CreateTemplate(name string, tpl string, funcs template.FuncMap) *template.Template {
