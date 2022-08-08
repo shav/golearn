@@ -105,6 +105,22 @@ func main() {
 	mapValue := reflect.MakeMap(mapType)
 	myMap = ValueOf[map[string]int](mapValue)
 	fmt.Println(myMap)
+
+	fmt.Println("--------------------------------------")
+
+	// Манипулирование срезами
+	v := 10
+	rv := reflect.ValueOf(v)
+	intSliceValue = reflect.Append(intSliceValue, rv)
+	intSlice = ValueOf[[]int](intSliceValue)
+	fmt.Println(intSlice)
+
+	// Манипулирование словарями
+	k := "hello"
+	rk := reflect.ValueOf(k)
+	mapValue.SetMapIndex(rk, rv)
+	myMap = ValueOf[map[string]int](mapValue)
+	fmt.Println(myMap)
 }
 
 func TypeOf[T any]() reflect.Type {
