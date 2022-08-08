@@ -83,4 +83,34 @@ func main() {
 	fmt.Println(person)
 
 	fmt.Println("--------------------------------------")
+
+	// Создание нового объекта
+	personType = TypeOf[Person]()
+	personVal = reflect.New(personType)
+	personVal.Elem().Field(0).SetString("Vovan")
+	personVal.Elem().Field(1).SetInt(25)
+	person = personVal.Elem().Interface().(Person)
+	fmt.Println(person)
+
+	fmt.Println("--------------------------------------")
+
+	// Создание срезов
+	sliceType = TypeOf[[]int]()
+	intSliceValue := reflect.MakeSlice(sliceType, 0, 0)
+	intSlice := ValueOf[[]int](intSliceValue)
+	fmt.Println(intSlice)
+
+	// Создание словарей
+	mapType = TypeOf[map[string]int]()
+	mapValue := reflect.MakeMap(mapType)
+	myMap = ValueOf[map[string]int](mapValue)
+	fmt.Println(myMap)
+}
+
+func TypeOf[T any]() reflect.Type {
+	return reflect.TypeOf((*T)(nil)).Elem()
+}
+
+func ValueOf[T any](reflectValue reflect.Value) T {
+	return reflectValue.Interface().(T)
 }
