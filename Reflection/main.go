@@ -7,9 +7,21 @@ import (
 
 type Temperature int
 
+type IAlive interface {
+	Eat()
+}
+
 type Person struct {
 	Name string `tag1:"First Tag" tag2:"Second Tag"`
 	Age  int
+}
+
+func (person Person) Eat() {
+	fmt.Println(person.Name + " eats")
+}
+
+type Plane struct {
+	Model string
 }
 
 type List[T any] []T
@@ -81,6 +93,14 @@ func main() {
 	// Означивание полей структуры
 	strProperty.SetString("Tom")
 	fmt.Println(person)
+
+	fmt.Println("--------------------------------------")
+
+	personType = TypeOf[Person]()
+	planeType := TypeOf[Plane]()
+	aliveInterface := TypeOf[IAlive]()
+	fmt.Printf("Person implements IAlive: %t\n", personType.Implements(aliveInterface))
+	fmt.Printf("Plane implements IAlive: %t\n", planeType.Implements(aliveInterface))
 
 	fmt.Println("--------------------------------------")
 
