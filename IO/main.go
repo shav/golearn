@@ -119,7 +119,7 @@ func main() {
 		fmt.Println(err)
 	} else {
 		data := make([]byte, 4)
-		rFile.Seek(4, 0) // сдвигаем позицию для чтения
+		rFile.Seek(4, io.SeekStart) // сдвигаем позицию для чтения
 		for {
 			n, err := io.ReadAtLeast(rFile, data, 2)
 			//n, err := rFile.Read(data)
