@@ -1,5 +1,10 @@
 {
   "welcome": "Welcome!",
-  "hello": "Hello {{Name}}! Today is {{.Today}}",
-  "ItemsCount": "Items count: {{.PluralCount}}"
+  "hello": "Hello {{.Name}}! Today is {{.Today}}",
+  "ItemsCount": "Items count: {{.PluralCount}}",
+  "Cookies": {
+    "zero": "There are no cookies",
+    "one": "There are {{.PluralCount}} cookie",
+    "other": "There are {{.PluralCount}} cookies"
+  }
 }

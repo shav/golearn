@@ -1,5 +1,13 @@
 {
   "welcome": "Добро пожаловать!",
   "hello": "Привет, {{.Name}}! Сегодня {{.Today}}",
-  "ItemsCount": "Кол-во элементов: {{.PluralCount}}"
+  "ItemsCount": "Кол-во элементов: {{.PluralCount}}",
+  "Cookies": {
+    "zero": "Нет печенек",
+    "one": "Есть {{.PluralCount}} печенька",
+    "two": "Есть {{.PluralCount}} печеньки",
+    "few": "Есть несколько печенек",
+    "many": "Есть много печенек",
+    "other": "Есть {{.PluralCount}} печенек"
+  }
 }

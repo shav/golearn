@@ -41,6 +41,13 @@ func main() {
 	})
 	fmt.Println(lStr3)
 
+	// Множественное число (фигня полная, для русского языка в таком виде это не подходит!)
+	lStr4, _ := localizer.Localize(&i18n.LocalizeConfig{
+		DefaultMessage: &i18n.Message{ID: "Cookies"},
+		PluralCount:    1,
+	})
+	fmt.Println(lStr4)
+
 	fmt.Println("--------------------------------------")
 
 	// Множественное число
