@@ -1,8 +1,11 @@
+// https://medium.com/capital-one-tech/learning-to-use-go-reflection-822a0aed74b7
+
 package main
 
 import (
 	"fmt"
 	"reflect"
+	"runtime"
 )
 
 type Temperature int
@@ -96,6 +99,7 @@ func main() {
 
 	fmt.Println("--------------------------------------")
 
+	// Проверка совместимости типов между собой
 	personType = TypeOf[Person]()
 	planeType := TypeOf[Plane]()
 	aliveInterface := TypeOf[IAlive]()
@@ -173,6 +177,23 @@ func main() {
 		property.Set(reflect.ValueOf(value))
 	}
 	fmt.Printf("%+v\n", structObject)
+
+	fmt.Println("--------------------------------------")
+
+	// Вызов функций через reflection
+	function := Sum
+	rf := reflect.TypeOf(function)
+	if rf.Kind() != reflect.Func {
+		panic("expects a function")
+	}
+	vf := reflect.ValueOf(function)
+	wrapperF := reflect.MakeFunc(rf, func(in []reflect.Value) []reflect.Value {
+		out := vf.Call(in)
+		fmt.Printf("calling %s...\n", runtime.FuncForPC(vf.Pointer()).Name())
+		return out
+	})
+	var wSum = wrapperF.Interface().(func(int, int) int)
+	fmt.Println(wSum(1, 2))
 }
 
 func TypeOf[T any]() reflect.Type {
@@ -181,4 +202,8 @@ func TypeOf[T any]() reflect.Type {
 
 func ValueOf[T any](reflectValue reflect.Value) T {
 	return reflectValue.Interface().(T)
+}
+
+func Sum(a, b int) int {
+	return a + b
 }
