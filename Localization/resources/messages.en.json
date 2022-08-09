@@ -1,3 +1,5 @@
 {
-  "welcome": "Welcome!"
+  "welcome": "Welcome!",
+  "hello": "Hello {{Name}}! Today is {{.Today}}",
+  "ItemsCount": "Items count: {{.PluralCount}}"
 }

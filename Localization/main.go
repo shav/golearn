@@ -7,6 +7,7 @@ import (
 	"golang.org/x/text/feature/plural"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
+	"time"
 )
 
 var bundle *i18n.Bundle
@@ -24,6 +25,21 @@ func main() {
 		MessageID: "welcome",
 	})
 	fmt.Println(lStr)
+
+	lStr2, _ := localizer.Localize(&i18n.LocalizeConfig{
+		MessageID: "hello",
+		TemplateData: map[string]string{
+			"Name":  "Artem",
+			"Today": time.Now().Format("02.01.2006"),
+		},
+	})
+	fmt.Println(lStr2)
+
+	lStr3, _ := localizer.Localize(&i18n.LocalizeConfig{
+		MessageID:   "ItemsCount",
+		PluralCount: 2,
+	})
+	fmt.Println(lStr3)
 
 	fmt.Println("--------------------------------------")
 
