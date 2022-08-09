@@ -102,6 +102,13 @@ func main() {
 	fmt.Printf("Person implements IAlive: %t\n", personType.Implements(aliveInterface))
 	fmt.Printf("Plane implements IAlive: %t\n", planeType.Implements(aliveInterface))
 
+	intType := TypeOf[int]()
+	temperatureType = TypeOf[Temperature]()
+	fmt.Printf("Person is assignable to IAlive: %t\n", personType.AssignableTo(aliveInterface))
+	fmt.Printf("Int is assignable to Temperature: %t\n", intType.AssignableTo(temperatureType))
+	fmt.Printf("Int is convertible to Temperature: %t\n", intType.ConvertibleTo(temperatureType))
+	fmt.Printf("Temperature is convertible to Int: %t\n", temperatureType.ConvertibleTo(intType))
+
 	fmt.Println("--------------------------------------")
 
 	// Создание нового объекта
