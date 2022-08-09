@@ -1,13 +1,32 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"golang.org/x/text/feature/plural"
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"
 )
 
+var bundle *i18n.Bundle
+
+func init() {
+	bundle = i18n.NewBundle(language.English)
+	bundle.RegisterUnmarshalFunc("json", json.Unmarshal)
+	bundle.LoadMessageFile("resources/messages.en.json")
+	bundle.LoadMessageFile("resources/messages.ru.json")
+}
+
 func main() {
+	localizer := i18n.NewLocalizer(bundle, language.Russian.String())
+	lStr, _ := localizer.Localize(&i18n.LocalizeConfig{
+		MessageID: "welcome",
+	})
+	fmt.Println(lStr)
+
+	fmt.Println("--------------------------------------")
+
 	// Множественное число
 	const ITEMS_MESSAGE string = "%d items"
 	message.Set(language.English, ITEMS_MESSAGE,
