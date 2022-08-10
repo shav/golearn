@@ -44,6 +44,8 @@ func main() {
 	fmt.Println(num7)
 	fmt.Println(num8)
 
+	fmt.Println("---------------------------------------")
+
 	// область видимости переменных
 	fmt.Printf("globalVar: %d\n", globalVar)
 	if true {
@@ -52,8 +54,26 @@ func main() {
 		for i := 0; i < 2; i++ {
 			forVar := i
 			fmt.Printf("blockVar for: %d\n", forVar)
+
+			// Доступ к внешней переменной (объявленной ранее вне блока)
+			num3 = i
+			fmt.Println(num3)
+
+			blockVar = 2 * i
+			fmt.Println(blockVar)
+
+			globalVar = 3 * i
+			fmt.Println(globalVar)
+			// Внешние перменные, объявленные после данного кода, уже недоступны:
+			// blockVar2 = i
 		}
 		// forVar = 3 // переменная из блока for недоступна вне блока
+
+		blockVar2 := 2
+		fmt.Println(blockVar2)
+
+		num0 := 300 // Shadowed-переменная для другой переменной с таким же именем во внешнем блоке
+		fmt.Println("shadowed num0 in block: ", num0)
 	} else {
 		// blockVar = 3 // переменная из блока if недоступна автоматически в блоке else
 		var blockVar = 3
@@ -61,12 +81,31 @@ func main() {
 	}
 	// blockVar = 3 // переменная из блока if недоступна вне блока
 
+	fmt.Println("num0 after block: ", num0) // Shadowed-переменная изменена во внутреннем блоке
+	fmt.Println("num3 after block: ", num3) // Переменная изменена во внутреннем блоке
+
+	fmt.Println("---------------------------------------")
+
 	var f = func() {
 		var funcVar = 4
 		fmt.Printf("funcVar: %d\n", funcVar)
+
+		globalVar = 100
+		fmt.Println("globalVar in func: ", globalVar)
+
+		num3 = 200
+		fmt.Println("num3 in func: ", num3)
+
+		// Переменные из других соседних блоков недостпны вне самого блока:
+		// blockVar = 3
 	}
 	f()
 	// funcVar = 5 // переменная из анонимной функции недоступна вне этой функции
+
+	fmt.Println("globalVar after func: ", globalVar)
+	fmt.Println("num3 after func: ", num3)
+
+	fmt.Println("---------------------------------------")
 
 	// Переменные и указатели на структуры
 	var person0 Person
