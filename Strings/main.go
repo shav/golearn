@@ -53,6 +53,13 @@ func main() {
 	const unicodeChar = '\u00e9'
 	fmt.Printf("%c\n", unicodeChar)
 
+	// Конкатенация символов
+	// concatChar := beta+gamma // так неверно, это будует числовая операция, т.к. символы в go внутрях являются числами
+	concatChar := string(beta) + string(gamma)
+	fmt.Println(concatChar)
+	concatChar2 := fmt.Sprintf("%c%c", gamma, delta)
+	fmt.Println(concatChar2)
+
 	fmt.Println("--------------------------------------")
 
 	// Строки
