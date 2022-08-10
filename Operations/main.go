@@ -13,10 +13,19 @@ func main() {
 	fmt.Printf("int * int: %d\n", num1*num2)
 	fmt.Printf("int / int: %d\n", num1/num2)
 	fmt.Printf("int %% int: %d\n", num1%num2)
+
 	num1++
 	fmt.Printf("int++: %d\n", num1)
+	// ++num1 // error: префиксного инкремента нет
+
 	num1--
 	fmt.Printf("int--: %d\n", num1)
+	// --num1 // error: аналогично, префиксного декремента тоже нет
+
+	// Инкремент/декремент не может участвовать в выражениях, только сам по себе
+	// a:=2*num1++
+	// array :=[]int{1,2,3}
+	// fmt.Println(array[num1++])
 
 	fmt.Println("--------------------------------------")
 
