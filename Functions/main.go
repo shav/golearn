@@ -93,6 +93,10 @@ func main() {
 	q, r := divide(n1, n2)
 	fmt.Printf("divide(%d, %d): q=%d, r=%d\n", n1, n2, q, r)
 
+	fmt.Println(divide(n1, n2))
+	// inc(divide(n1, n2)) // Error: нельзя передавать несколько аргументов в функцию inc() с одним аргументом
+	fmt.Println(sum(divide(n1, n2)))
+
 	fmt.Println("---------------------------------")
 
 	// Переменные типа "Функция"
