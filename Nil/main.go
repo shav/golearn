@@ -79,6 +79,7 @@ func main() {
 
 	// fmt.Println(*structPointer) // NRE
 	// *structPointer = Person{}   // NRE
+	// structPointer.Name = "Tom" // NRE
 
 	structPointer = (*Person)(nil)
 	fmt.Printf("typed-nil-init-struct-pointer == nil: %v\n", structPointer == nil)
