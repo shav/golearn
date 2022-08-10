@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	// срезы - как динамические списки
+	// срезы - как окно в невидимый массив
 	// инициализация через литерал
 	var users = []string{"Tom", "Alice", "Kate"}
 	fmt.Printf("%v, len = %d, capacity = %d\n", users, len(users), cap(users))
@@ -16,6 +16,17 @@ func main() {
 	// Добавление элемента в список
 	users = append(users, "Bob")
 	fmt.Printf("%v, len = %d, capacity = %d\n", users, len(users), cap(users))
+
+	// Ловушка при добавлении в срез
+	a := []byte("ba ")
+	// HACK: добиваемся того, чтобы длина среза была меньше ёмкости (на некоторых машинах/ОС такое может быть изначально при создании среза)
+	a[2] = 0
+	a = a[:2] // В конце среза остаётся незаполненный элемент
+	fmt.Printf("%v, len = %d, capacity = %d\n", a, len(a), cap(a))
+	a1 := append(a, 'd')
+	a2 := append(a, 'g')
+	fmt.Println(string(a1)) // bag
+	fmt.Println(string(a2)) // bag
 
 	// Конкатенация списков
 	var users1 = []string{"Artem", "Vovan", "Dimon"}
