@@ -353,6 +353,12 @@ line5`
 	replace := r.ReplaceAllString(stringWithSpaces, " ")
 	fmt.Println(replace)
 
+	abba := "ABBA"
+	trim1 := strings.TrimRight(abba, "BA" /* это набор символов для обрезки ! */)
+	fmt.Println("TrimRight: ", trim1)
+	trim2 := strings.TrimSuffix(abba, "BA" /* а вот здесь уже подстрока для обрезки */)
+	fmt.Println("TrimRight: ", trim2)
+
 	fmt.Println("--------------------------------------")
 
 	// base64
