@@ -5,6 +5,7 @@ import (
 	"io"
 	"net"
 	"os"
+	"time"
 )
 
 func main() {
@@ -54,12 +55,18 @@ func main() {
 				continue
 			}
 			// получаем ответ
-			response := make([]byte, 1024)
-			n, err = conn.Read(response)
-			if err != nil {
-				continue
+			response := make([]byte, 0)
+			conn.SetReadDeadline(time.Now().Add(time.Second * 5))
+			for {
+				buffer := make([]byte, 1024)
+				n, err = conn.Read(buffer)
+				if err != nil {
+					break
+				}
+				response = append(response, buffer[0:n]...)
+				conn.SetReadDeadline(time.Now().Add(time.Millisecond * 700))
 			}
-			translate := string(response[0:n])
+			translate := string(response[:])
 			fmt.Printf("Перевод: %s - %s\n", word, translate)
 		}
 		fmt.Println("\nDone")
