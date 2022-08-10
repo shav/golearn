@@ -29,6 +29,11 @@ type DateTime struct {
 	time.Time
 }
 
+type Plane struct {
+	model  string
+	weight int
+}
+
 var defaultDateTime = time.Time{}
 
 const universalDateTimeFormat = "2006-01-02T15:04:05-07:00"
@@ -99,6 +104,14 @@ func main() {
 	}
 	tomJson, _ := json.MarshalIndent(tom, "", "  ")
 	fmt.Println(string(tomJson))
+
+	fmt.Println("--------------------------------------")
+
+	// Ловушка: сериализация структуры, все поля которой приватные
+	fmt.Println("Private struct: ")
+	plane := Plane{model: "Airbus", weight: 100}
+	planeJson, _ := json.MarshalIndent(plane, "", "  ")
+	fmt.Println(string(planeJson))
 
 	fmt.Println("--------------------------------------")
 
