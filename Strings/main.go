@@ -36,11 +36,14 @@ func main() {
 
 	const gammaStr = "γ"
 	var gamma, _ = utf8.DecodeRuneInString(gammaStr)
-	fmt.Printf("%c: %[1]v\n", gamma)
+	var gammaBytes = []byte(string(gamma))
+	fmt.Printf("%c: %[1]v (%v)\n", gamma, gammaBytes)
 	beta := gamma - 1
-	fmt.Printf("%c: %[1]v\n", beta)
+	var betaBytes = []byte(string(beta))
+	fmt.Printf("%c: %[1]v (%v)\n", beta, betaBytes)
 	delta := gamma + 1
-	fmt.Printf("%c: %[1]v\n", delta)
+	var deltaBytes = []byte(string(delta))
+	fmt.Printf("%c: %[1]v (%v)\n", delta, deltaBytes)
 
 	const rootStr = "本"
 	var root, _ = utf8.DecodeRuneInString(rootStr)
