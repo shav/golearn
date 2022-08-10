@@ -68,6 +68,10 @@ func main() {
 
 	// Копирование срезов
 	fmt.Println("Copied slice:")
+	var numbers0 []int
+	copy(numbers0, numbers)
+	fmt.Println(numbers0)
+
 	var numbers2 = make([]int, 2)
 	copy(numbers2, numbers)
 	fmt.Println(numbers2)
@@ -152,7 +156,7 @@ func main() {
 	fmt.Println(planets)
 	fmt.Printf("%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 
-	iceGiants = giants[2:4:5 /*ёмкость*/]
+	iceGiants = giants[2:4:5 /*ёмкость*/ ]
 	fmt.Printf("\n%v, len = %d, capacity = %d\n", iceGiants, len(iceGiants), cap(iceGiants))
 	iceGiants = append(iceGiants, "Плутон")
 	iceGiants[1] = "Neptun"
