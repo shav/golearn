@@ -15,6 +15,7 @@ func main() {
 		return
 	}
 	defer listener.Close()
+
 	fmt.Println("Server is listening...")
 	for {
 		conn, err := listener.Accept()
@@ -26,6 +27,4 @@ func main() {
 		conn.Write([]byte(message))
 		conn.Close()
 	}
-
-	fmt.Println("----------------------------------------")
 }
