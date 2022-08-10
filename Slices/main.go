@@ -51,26 +51,42 @@ func main() {
 	numbers[1] = 2
 	fmt.Printf("%v, len = %d, capacity = %d\n", numbers, len(numbers), cap(numbers))
 
+	// Добавление элементов в срез
 	numbers = append(numbers, 4)
 	fmt.Printf("%v, len = %d, capacity = %d\n", numbers, len(numbers), cap(numbers))
 
+	// инициализация через make с указанием ёмкости
+	numbers = make([]int, 0 /* длина */, 10 /* ёмкость */)
+	numbers = append(numbers, 0, 10, 20, 30, 40, 50)
+	fmt.Printf("%v, len = %d, capacity = %d\n", numbers, len(numbers), cap(numbers))
+
+	fmt.Println("--------------------------------------")
+
+	// Обход элементов среза в цикле
 	for _, num := range numbers {
 		fmt.Printf("%d, ", num)
 	}
 	fmt.Println()
 
-	fmt.Println("--------------------------------------")
-
-	// инициализация через make с указанием ёмкости
-	numbers = make([]int, 0 /* длина */, 10 /* ёмкость */)
-	numbers = append(numbers, 0, 1, 2, 3, 4, 5)
-	fmt.Printf("%v, len = %d, capacity = %d\n", numbers, len(numbers), cap(numbers))
+	// Ловушка: обход индексов среза, а не значений!
+	for i := range numbers {
+		fmt.Printf("%d, ", i)
+	}
+	fmt.Println()
 
 	// range вычисляется перед выполнением цикла -
 	// все элементы, добавленные или удалённые во время итераций, в цикле не учитываются
 	for index, num := range numbers {
 		fmt.Printf("%d, ", num)
 		numbers = append(numbers, 6+index)
+	}
+	fmt.Println()
+	fmt.Println(numbers)
+
+	for _, num := range numbers {
+		fmt.Printf("%d, ", num)
+		// Изменение циклической переменной никак не влияет элементы в самом срезе
+		num = num * 2
 	}
 	fmt.Println()
 	fmt.Println(numbers)

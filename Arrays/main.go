@@ -77,6 +77,27 @@ func main() {
 	}
 	fmt.Println()
 
+	for i, num := range numbers5 {
+		if i < len(numbers5)-1 {
+			// range вычисляет элементы перечисления заранее (перед запуском цикла),
+			// поэтому все манипуляции с массивом внутри цикла в самом цикле через циклическую переменную не видны
+			numbers5[i+1] *= 2
+		}
+		fmt.Printf("%d, ", num)
+	}
+	fmt.Println("\nArray modified in loop:")
+	fmt.Println(numbers5)
+
+	// Чтобы изменения всё-таки были бы видны в цикле, нужно итерироваться не по массиву, а по его срезу целиком
+	for i, num := range numbers5[:] {
+		if i < len(numbers5)-1 {
+			numbers5[i+1] += 1
+		}
+		fmt.Printf("%d, ", num)
+	}
+	fmt.Println("\nArray modified in loop:")
+	fmt.Println(numbers5)
+
 	fmt.Println("---------------------------------")
 
 	// копирование массива
