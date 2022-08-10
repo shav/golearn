@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"math/big"
+	"sync"
 )
 
 type Point struct {
@@ -115,9 +116,23 @@ func main() {
 	sumPositive := sumBy(isPositive, -1, 2, -3, 4, -5, 6)
 	fmt.Printf("sum(positive): %d\n", sumPositive)
 
+	fmt.Println("---------------------------------")
+
 	// замыкание окружения
 	squareNext := square(2)
 	fmt.Printf("%d, %d, %d, %d, %d", squareNext(), squareNext(), squareNext(), squareNext(), squareNext())
+	fmt.Println()
+
+	// Ловушка: замыкание циклической переменной
+	var wg sync.WaitGroup
+	wg.Add(5)
+	for i := 0; i < 5; i++ {
+		go func() {
+			fmt.Print(i)
+			wg.Done()
+		}()
+	}
+	wg.Wait()
 }
 
 func fib(n uint) uint {
