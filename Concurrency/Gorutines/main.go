@@ -11,8 +11,6 @@ func main() {
 	go func(msg string) {
 		fmt.Println(msg)
 	}("going")
-
-	fmt.Printf("------------------------------")
 }
 
 func printMessage(msg string) {
